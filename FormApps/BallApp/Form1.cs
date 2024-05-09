@@ -3,6 +3,7 @@ namespace BallApp {
         //Obj ball;
         //PictureBox pb;
 
+
         //ListƒRƒŒƒNƒVƒ‡ƒ“
         private List<Obj> balls = new List<Obj>();
         private List<PictureBox> pbs = new List<PictureBox>();
@@ -15,14 +16,15 @@ namespace BallApp {
         private void Form1_Load(object sender, EventArgs e) {
             //this.BackColor = Color.Green;
 
+            this.Text = "BallApp SoccerBall:"+0+"TennisBall:"+0;
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            
-            for (int i =0; i<balls.Count; i++) {
+
+            for (int i = 0; i < balls.Count; i++) {
                 balls[i].Move();
                 pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
-                
+
             }
         }
 
@@ -39,7 +41,6 @@ namespace BallApp {
             } else if (e.Button == MouseButtons.Right) {
                 pb.Size = new Size(30, 30);
                 ball = new TennisBall(e.X - 15, e.Y - 15);
-
             }
             pb.Image = ball.Image;
             pb.Location = new Point((int)ball.PosX, (int)ball.PosY);
@@ -49,6 +50,8 @@ namespace BallApp {
 
             balls.Add(ball);
             pbs.Add(pb);
+
+            this.Text = "BallApp SoccerBall:"+SoccerBall.Count+"TennisBall:"+TennisBall.Count;
         }
     }
 }

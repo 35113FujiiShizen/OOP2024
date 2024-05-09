@@ -7,11 +7,15 @@ using System.Xml.XPath;
 
 namespace BallApp {
     internal class SoccerBall : Obj {
+        public static int Count { get; set; }
+
         public SoccerBall(double xp, double yp)
             : base(xp, yp, @"Picture\soccer_ball.png") {
 
             MoveX = 5; //移動量設定
             MoveY = 5;
+
+            Count++;
         }
 
         //移動メソッド（抽象メソッド）
