@@ -36,5 +36,9 @@ namespace BallApp {
 
             return true;
         }
+
+        public override bool Move(Keys direction) {
+           return true;
+        }
     }
 }
