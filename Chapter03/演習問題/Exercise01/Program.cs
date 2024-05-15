@@ -29,22 +29,20 @@ namespace Exercise01 {
             var exists = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
             Console.WriteLine(exists);
         }
-        
+
 
         private static void Exercise1_2(List<int> numbers) {
-           numbers.ForEach(x => Console.WriteLine(x/2.0));
+            numbers.ForEach(x => Console.WriteLine(x / 2.0));
         }
 
         private static void Exercise1_3(List<int> numbers) {
-            var where = numbers.Where(s => s >= 50);
-            foreach (var s in where)
-                Console.WriteLine(s);
+            numbers.Where(s => s >= 50).ToList()
+                                       .ForEach(s => Console.WriteLine(s));
         }
 
         private static void Exercise1_4(List<int> numbers) {
-            var where = numbers.Select(s => s *2);
-            foreach (var s in where)
-                Console.WriteLine(s);
+            numbers.Select(s => s * 2).ToList()
+                                     .ForEach(s => Console.WriteLine(s));
         }
     }
 }
