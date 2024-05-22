@@ -18,7 +18,7 @@ namespace Exercise02 {
             "Hong Kong",
             };
 
-            
+
 
             Console.WriteLine("*****3.2.1*****");
             Exercise2_1(names);
@@ -57,14 +57,16 @@ namespace Exercise02 {
 
         private static void Exercise2_3(List<string> names) {
             var query = names.Where(s => s.Contains('o')).ToArray();
-            foreach (var item in query)
-            {
+            foreach (var item in query) {
                 Console.WriteLine(item);
             }
         }
 
         private static void Exercise2_4(List<string> names) {
-            var where = names.Where(s => s.Contains('o'));
+            var query = names.Where(s => s.Contains('B')).Select(s => s.Count());
+            foreach (var item in query) {
+                Console.WriteLine(item);
+            }
         }
     }
 }
