@@ -56,7 +56,11 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_3(List<string> names) {
-
+            var where = names.Where(s => s.Contains('o'));
+            foreach (var item in where)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private static void Exercise2_4(List<string> names) {
