@@ -51,7 +51,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            IEnumerable<string> query = names.Where()
+            var count = names.Count(s => s.Contains('o'));
+            Console.WriteLine(count);
         }
 
         private static void Exercise2_3(List<string> names) {
