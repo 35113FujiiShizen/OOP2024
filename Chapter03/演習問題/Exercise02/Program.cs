@@ -63,9 +63,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_4(List<string> names) {
-            var query = names.Where(s => s.Contains('B')).Select(s => s.Count());
+            var query = names.Where(s => s.Contains('B')).Select(s => new { s.Length, s });
             foreach (var item in query) {
-                Console.WriteLine(item);
+                Console.WriteLine(item.s+","+item.Length);
             }
         }
     }

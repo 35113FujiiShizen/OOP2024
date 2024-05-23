@@ -1,6 +1,7 @@
 namespace BallApp {
     public partial class Form1 : Form {
 
+        private int scoreCount = 0;
 
         //Listコレクション
         private List<Obj> balls = new List<Obj>();
@@ -17,10 +18,11 @@ namespace BallApp {
         //フォームが最初にロードされるとき一度だけ実行される
         private void Form1_Load(object sender, EventArgs e) {
             this.Text = "BallApp SoccerBall:" + 0 + "TennisBall:" + 0;
+            score.Text = "スコア："+this.scoreCount;
 
             bar = new Bar(340, 500);
-
             pbBar = new PictureBox();
+
             pbBar.Image = bar.Image;
             pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
             pbBar.Size = new Size(150, 10);
@@ -31,11 +33,26 @@ namespace BallApp {
         private void timer1_Tick(object sender, EventArgs e) {
 
             for (int i = 0; i < balls.Count; i++) {
-                balls[i].Move(pbBar, pbs[i]);
-                pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
+                int ret = balls[i].Move(pbBar, pbs[i]);
+                if (ret == 1) {
+                    //落下したボールインスタンスを削除する
+                    balls.RemoveAt(i);
+                    pbs[i].Location = new Point(20000, 20000);
+                    pbs.RemoveAt(i);
+
+                    this.scoreCount -= 10;
+                    score.Text = "スコア：" + --this.scoreCount;
+
+                } else if(ret == 2){
+                    //バーに当たった
+                    score.Text = "スコア："+ ++this.scoreCount;
+                    pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
+                } else {
+                    //移動正常
+                    pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
+                }
             }
         }
-
         //マウスクリックイベントハンドラー
         private void Form1_MouseClick(object sender, MouseEventArgs e) {
             PictureBox pb = new PictureBox();//画像を表示するコントロール

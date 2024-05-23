@@ -14,14 +14,24 @@ namespace BallApp {
         public SoccerBall(double xp, double yp)
             : base(xp, yp, @"Picture\soccer_ball.png") {
 
-            MoveX = random.Next(-25, 25); //移動量設定
-            MoveY = random.Next(-25, 25);
+#if DEBUG
+            MoveX = 5;
+            MoveY = 5;
+#else
+            MoveX = random.Next(-15, 15); //移動量設定
+            MoveY = random.Next(-15, 15);
+#endif
+
+
 
             Count++;
         }
 
         //移動メソッド（抽象メソッド）
-        public override bool Move(PictureBox pbBar, PictureBox pbBall) {
+        //戻り値：０…移動OK、２…落下した、３…バーに当たった
+        public override int Move(PictureBox pbBar, PictureBox pbBall) {
+            int ret = 0;
+
             Rectangle rBar = new Rectangle(pbBar.Location.X, pbBar.Location.Y, pbBar.Width, pbBar.Height);
 
 
@@ -32,15 +42,27 @@ namespace BallApp {
                 //移動量の符号を反転
                 MoveX = -MoveX;
             }
-            if (PosY > 500 || PosY < 0 || rBar.IntersectsWith(rBall)) {
+            if (PosY < 0) {
                 //移動量の符号を反転
                 MoveY = -MoveY;
+            }
+
+            //バーに当たったか
+            if (rBar.IntersectsWith(rBall)) {
+                MoveY = -MoveY;
+                ret = 2;
             }
 
             PosX += MoveX;
             PosY += MoveY;
 
-            return true;
+            //下に落下したか
+            if (PosY > 500)
+                ret = 1;
+
+
+            //移動完了
+            return ret;
         }
 
         public override bool Move(Keys direction) {
