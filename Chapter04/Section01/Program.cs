@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,33 +28,49 @@ namespace Section01 {
 
             Console.Write("整数を入力:");
             string inputNum = Console.ReadLine();
-            int num;
+            try {
+                int num = int.Parse(inputNum);
+            }
+            catch (FormatException ex) {
+                Console.WriteLine("FormatException " + ex.Message);
+            }
+            catch (ArgumentException ex) {
+                Console.WriteLine("ArgumentException " + ex.Message);
+            }
+            catch (OverflowException ex) {
+                Console.WriteLine("OverflowException" + ex.Message);
+            }
+            finally {
+                Console.WriteLine("処理が終了しました");
+            }
+
+            }
 
 
-            if (int.TryParse(inputNum, out num)) {
-                Console.WriteLine("整数(int型)に変換した値：" + num);
-            } else {
-                Console.WriteLine("整数に変換できませんでした。");
+
+
+
+
+
+
+            private static object GetMessage(string code) {
+                return null;
+            }
+
+            private static string DefaultMessage() {
+                return "Default Message";
             }
         }
-        private static object GetMessage(string code) {
-            return null;
-        }
+        //売上クラス
+        public class Sale {
 
-        private static string DefaultMessage() {
-            return "Default Message";
+            //店舗名
+            public String ShopName { get; set; }
+
+            //商品カテゴリー
+            public String ProductCategory { get; set; }
+
+            //売上高
+            public int Amount { get; set; }
         }
     }
-    //売上クラス
-    public class Sale {
-
-        //店舗名
-        public String ShopName { get; set; }
-
-        //商品カテゴリー
-        public String ProductCategory { get; set; }
-
-        //売上高
-        public int Amount { get; set; }
-    }
-}
