@@ -11,7 +11,7 @@ namespace Exercise02 {
             string str1 = Console.ReadLine();
             int.TryParse(str1, out int num1);
             var num2 = num1.ToString("#,0");
-            
+            Console.WriteLine(num2);
         }
     }
 }
