@@ -36,8 +36,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            
-
+            int count = text.Split(' ').Length;
+            Console.WriteLine("単語数：{0}", count);
         }
 
         private static void Exercise3_4(string text) {
