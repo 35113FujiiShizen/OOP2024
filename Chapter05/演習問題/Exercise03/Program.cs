@@ -26,17 +26,18 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-            int count = text.Count();
-            Console.WriteLine(count);
+            int count = text.Count(c => c == ' ');
+            Console.WriteLine("空白文字数："+count);
         }
 
         private static void Exercise3_2(string text) {
-            var replaced = text.Replace("big", "small");
-            Console.WriteLine(replaced);
+            var spaces = text.Replace("big", "small");
+            Console.WriteLine(spaces);
         }
 
         private static void Exercise3_3(string text) {
-            int index = text.IndexOf(text);
+            
+
         }
 
         private static void Exercise3_4(string text) {
