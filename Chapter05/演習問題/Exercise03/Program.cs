@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,12 +54,27 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_5(string text) {
-            var sb = new StringBuilder();
-            var words = text.Split(' ');
-            foreach (var word in words) {
-                sb.Append(word+" ");
+            //var sb = new StringBuilder();
+            //var words = text.Split(' ');
+            //foreach (var word in words) {
+            //    sb.Append(word+" ");
+            //}
+            //Console.WriteLine(sb.ToString());
+            var array = text.Split(' ').ToArray();
+            if (array.Length > 0) {
+                var sb = new StringBuilder();
+                foreach (var word in array) {
+                    sb.Append(' ');
+                    sb.Append(word);
+                }
+                Console.WriteLine(sb.ToString());
             }
-            Console.WriteLine(sb.ToString());
+        }
+        private void Exercise3_6(string text) {
+            var array = text.Split(new[] { ' ', ',', '-', '_' }).ToArray();
+            foreach (var word in array) {
+                Console.WriteLine(word);
+            }
         }
     }
 }
