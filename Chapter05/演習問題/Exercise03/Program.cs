@@ -27,7 +27,7 @@ namespace Exercise03 {
 
         private static void Exercise3_1(string text) {
             int count = text.Count(c => c == ' ');
-            Console.WriteLine("空白文字数："+count);
+            Console.WriteLine("空白文字数：" + count);
         }
 
         private static void Exercise3_2(string text) {
@@ -42,7 +42,7 @@ namespace Exercise03 {
 
         private static void Exercise3_4(string text) {
             var words = text.Split(' ').Where(s => s.Length <= 4);
-            foreach (var word in words){
+            foreach (var word in words) {
                 Console.WriteLine(word);
             }
             //int count = text.Split(' ').Length;
@@ -52,7 +52,12 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_5(string text) {
-            
+            var sb = new StringBuilder();
+            var words = text.Split(' ');
+            foreach (var word in words) {
+                sb.Append(word+" ");
+            }
+            Console.WriteLine(sb.ToString());
         }
     }
 }
