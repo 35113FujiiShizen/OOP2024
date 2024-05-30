@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,23 +26,25 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-            throw new NotImplementedException();
+            int count = text.Count();
+            Console.WriteLine(count);
         }
 
         private static void Exercise3_2(string text) {
-            throw new NotImplementedException();
+            var replaced = text.Replace("big", "small");
+            Console.WriteLine(replaced);
         }
 
         private static void Exercise3_3(string text) {
-            throw new NotImplementedException();
+            int index = text.IndexOf(text);
         }
 
         private static void Exercise3_4(string text) {
-            throw new NotImplementedException();
+            
         }
 
         private static void Exercise3_5(string text) {
-            throw new NotImplementedException();
+            
         }
     }
 }

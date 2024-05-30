@@ -9,9 +9,15 @@ namespace Exercise02 {
         static void Main(string[] args) {
             Console.Write("数字を入力：");
             string str1 = Console.ReadLine();
-            int.TryParse(str1, out int num1);
-            var num2 = num1.ToString("#,0");
-            Console.WriteLine(num2);
+            if(int.TryParse(str1, out int num1)) {
+                //var num2 = num1.ToString("#,0");
+                //Console.WriteLine(num2);
+                Console.WriteLine($"{num1:#,#}");
+            } else {
+                Console.WriteLine("数字文字列ではありません");
+            }
+            
+            
         }
     }
 }
