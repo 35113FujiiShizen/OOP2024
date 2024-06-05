@@ -48,9 +48,12 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            var targetBook = books.FirstOrDefault(b => b.Title == "ワンダフル・C#ライフ");
-            Console.WriteLine("価格：" + targetBook.Price.ToString());
-            Console.WriteLine("ページ数：" + targetBook.Pages.ToString());
+            var targetBook = books.Where(b => b.Title == "ワンダフル・C#ライフ");
+            //Console.WriteLine("価格：" + targetBook.Price.ToString());
+            //Console.WriteLine("ページ数：" + targetBook.Pages.ToString());
+            foreach (var book in targetBook) {
+                Console.WriteLine("{0}:{1}円 {2}ページ", book.Title, book.Price, book.Pages);
+            }
         }
 
         private static void Exercise2_2(List<Book> books) {
@@ -70,7 +73,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_5(List<Book> books) {
-
+            var pages = books.Where(b=>b.Price <4000).Max(b => b.Pages);
+            Console.WriteLine(pages);
         }
 
         private static void Exercise2_6(List<Book> books) {
