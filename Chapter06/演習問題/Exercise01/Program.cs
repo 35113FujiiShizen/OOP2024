@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,29 +32,30 @@ namespace Exercise01 {
 
         private static void Exercise1_2(int[] numbers) {
             var last2 = numbers.Skip(numbers.Length - 2).ToArray();
-            foreach (var x in last2){
+            foreach (var x in last2) {
                 Console.WriteLine(x);
             }
         }
 
         private static void Exercise1_3(int[] numbers) {
             var strings = numbers.Select(x => x.ToString("000")).ToArray();
-            foreach (var item in strings){
+            foreach (var item in strings) {
                 Console.WriteLine(item);
             }
-            
+
         }
 
         private static void Exercise1_4(int[] numbers) {
             var sortednumber = numbers.OrderBy(x => x).Take(3).ToArray();
-            foreach (var item in sortednumber){
+            foreach (var item in sortednumber) {
                 Console.WriteLine(item.ToString());
             }
-            
+
         }
 
         private static void Exercise1_5(int[] numbers) {
-            
+            var results = numbers.Distinct().Count(n => n > 10);
+            Console.WriteLine(results);
         }
     }
 }
