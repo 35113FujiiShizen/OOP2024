@@ -48,22 +48,24 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            var targetBook = books.FirstOrDefault(b =>b.Title == "ワンダフル・C#ライフ");
-            Console.WriteLine("価格："+targetBook.Price.ToString());
+            var targetBook = books.FirstOrDefault(b => b.Title == "ワンダフル・C#ライフ");
+            Console.WriteLine("価格：" + targetBook.Price.ToString());
             Console.WriteLine("ページ数：" + targetBook.Pages.ToString());
         }
 
         private static void Exercise2_2(List<Book> books) {
-            var count = books.Count(b=>b.Title.Contains("C#"));
-            Console.WriteLine(count+"冊");
+            var count = books.Count(b => b.Title.Contains("C#"));
+            Console.WriteLine(count + "冊");
         }
 
         private static void Exercise2_3(List<Book> books) {
-
+            var cSharpBooks = books.Where(b => b.Title.Contains("C#")).ToList();
+            var averagePages = cSharpBooks.Average(b => b.Pages);
+            Console.WriteLine(averagePages);
         }
 
         private static void Exercise2_4(List<Book> books) {
-
+            var t
         }
 
         private static void Exercise2_5(List<Book> books) {
