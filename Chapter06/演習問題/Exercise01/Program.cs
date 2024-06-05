@@ -38,10 +38,17 @@ namespace Exercise01 {
 
         private static void Exercise1_3(int[] numbers) {
             var strings = numbers.Select(x => x.ToString("000")).ToArray();
-            Console.WriteLine(strings);
+            foreach (var item in strings){
+                Console.WriteLine(item);
+            }
+            
         }
 
         private static void Exercise1_4(int[] numbers) {
+            var sortednumber = numbers.OrderBy(x => x).Take(3).ToArray();
+            foreach (var item in sortednumber){
+                Console.WriteLine(item.ToString());
+            }
             
         }
 
