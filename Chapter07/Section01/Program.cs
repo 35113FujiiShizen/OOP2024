@@ -35,35 +35,59 @@ namespace Section01 {
 
 
             var prefOfficeDict = new Dictionary<string, string>();
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 5; i++) {
+                Console.Write(" ");
                 Console.Write("都道府県：");
                 var prefecture = Console.ReadLine();
-                Console.Write("県庁所在地：");
-                var prefecturalCapital = Console.ReadLine();
-                prefOfficeDict.Add(prefecture, prefecturalCapital);
-                //if (prefOfficeDict.ContainsKey(prefecture)) {
-                //    Console.WriteLine("上書きしますか？");
-                //}
+
+                if (prefOfficeDict.ContainsKey(prefecture)) {
+                    Console.WriteLine("上書きしますか？ y/n");
+                    var YesOrNo = Console.ReadLine();
+                    if (YesOrNo == "y") {
+                        //上書きする
+                        Console.Write("県庁所在地：");
+                        var uwagakiPrefecturalCapital = Console.ReadLine();
+                        prefOfficeDict[prefecture] = uwagakiPrefecturalCapital;
+                    } else {
+                        Console.Write("県庁所在地：");
+                        var prefecturalCapital = Console.ReadLine();
+                        prefOfficeDict.Add(prefecture, prefecturalCapital);
+                    }
+
+                }
+
+                bool endFlag = false;
+                while (!endFlag) {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("＊メニュー＊");
+                    Console.WriteLine("1：一覧表示");
+                    Console.WriteLine("2：検索");
+                    Console.WriteLine("9：終了");
+                    Console.Write("数字を入力してください：");
+                    var menuNum = int.Parse(Console.ReadLine());
+
+                    if (menuNum == 1) {
+                        foreach (var item in prefOfficeDict) {
+                            Console.WriteLine("{0}の県庁所在地は{1}です", item.Key, item.Value);
+                        }
+                        break;
+                    }
+
+                    if (menuNum == 2) {
+                        Console.Write("都道府県：");
+                        var prefecture2 = Console.ReadLine();
+                        if (prefOfficeDict.ContainsKey(prefecture2)) {
+                            Console.WriteLine("県庁所在地：" + prefOfficeDict[prefecture2]);
+                        }
+                        break;
+                    }
+
+                    if (menuNum == 9) {
+                        endFlag = true;
+                        break;
+                    }
+                }
             }
-
-            Console.WriteLine("＊メニュー＊");
-            Console.WriteLine("1：一覧表示");
-            Console.WriteLine("2：検索");
-            Console.WriteLine("9：終了");
-            Console.Write("数字を入力してください：");
-            var menunum = Console.ReadLine();
-
-
-
-            foreach (var item in prefOfficeDict) {
-                Console.WriteLine("{0}の県庁所在地は{1}です", item.Key, item.Value);
-            }
-
-
-
-
-
-
         }
     }
 }
