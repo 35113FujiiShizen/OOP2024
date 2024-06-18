@@ -18,6 +18,7 @@ namespace SelesCounter {
         private static IEnumerable<Sale> ReadSales(string filePath) {
             var sales = new List<Sale>();
             var lines = File.ReadAllLines(filePath);
+
             foreach (String line in lines) {
                 var items = line.Split(',');
                 var sale = new Sale {
