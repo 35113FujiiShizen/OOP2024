@@ -107,7 +107,7 @@ namespace Test02 {
         //問題６　身長170cm以上の体重平均を表示
         //　　　　出力結果【72.25kg】
         private static void Exercise06(List<Person> persons) {
-
+            
 
 
         }
