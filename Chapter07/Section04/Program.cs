@@ -24,35 +24,43 @@ namespace Section04 {
             }
             if (abbrs.Remove("NPT")) {
                 Console.WriteLine(abbrs.Count);
-            } else { 
+            } else {
                 Console.WriteLine("削除できません");
             }
 
-            // インデクサの利用例
-            var names = new[] { "WHO", "FIFA", "NPT", };
-            foreach (var name in names) {
-                var fullname = abbrs[name];
-                if (fullname == null)
-                    Console.WriteLine("{0}は見つかりません", name);
-                else
-                    Console.WriteLine("{0}={1}", name, fullname);
-            }
-            Console.WriteLine();
+            //7.2.4
+            //IEnumerableを実装したのでLINQが使える。
+            var abbreviation1 = abbrs.Where(x => x.Key.Length <= 3);
+            foreach (var abbr in abbreviation1) {
+                Console.WriteLine("{0}={1}", abbr.Key, abbr.Value);
+            };
 
-            // ToAbbreviationメソッドの利用例
-            var japanese = "東南アジア諸国連合";
-            var abbreviation = abbrs.ToAbbreviation(japanese);
-            if (abbreviation == null)
-                Console.WriteLine("{0} は見つかりません", japanese);
-            else
-                Console.WriteLine("「{0}」の略語は {1} です", japanese, abbreviation);
-            Console.WriteLine();
 
-            // FindAllメソッドの利用例
-            foreach (var item in abbrs.FindAll("国際")) {
-                Console.WriteLine("{0}={1}", item.Key, item.Value);
-            }
-            Console.WriteLine();
+            //// インデクサの利用例
+            //var names = new[] { "WHO", "FIFA", "NPT", };
+            //foreach (var name in names) {
+            //    var fullname = abbrs[name];
+            //    if (fullname == null)
+            //        Console.WriteLine("{0}は見つかりません", name);
+            //    else
+            //        Console.WriteLine("{0}={1}", name, fullname);
+            //}
+            //Console.WriteLine();
+
+            //// ToAbbreviationメソッドの利用例
+            //var japanese = "東南アジア諸国連合";
+            //var abbreviation = abbrs.ToAbbreviation(japanese);
+            //if (abbreviation == null)
+            //    Console.WriteLine("{0} は見つかりません", japanese);
+            //else
+            //    Console.WriteLine("「{0}」の略語は {1} です", japanese, abbreviation);
+            //Console.WriteLine();
+
+            //// FindAllメソッドの利用例
+            //foreach (var item in abbrs.FindAll("国際")) {
+            //    Console.WriteLine("{0}={1}", item.Key, item.Value);
+            //}
+            //Console.WriteLine();
 
         }
     }
