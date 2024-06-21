@@ -11,6 +11,7 @@ namespace Section04 {
     // List 7-19
     // 略語と対応する日本語を管理するクラス
     class Abbreviations:IEnumerable<KeyValuePair<string,string>>{
+
         private Dictionary<string, string> _dict = new Dictionary<string, string>();
 
         //7.2.1(Countプロパティの作成)
