@@ -18,5 +18,15 @@ namespace DateTimeApp {
             tbDisp.Text = past.ToString("D");
         }
 
+        private void btDayAfter_Click(object sender, EventArgs e) {
+            //double doubleValue = Decimal.ToDouble(nudDay.Value);
+            var past = dtpBirthday.Value.AddDays((double)nudDay.Value);
+            tbDisp.Text = past.ToString("D");
+        }
+
+        private void btAge_Click(object sender, EventArgs e) {
+
+            int age = today.Year - birthDay.Year;
+        }
     }
 }
