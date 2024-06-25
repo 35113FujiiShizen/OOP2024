@@ -26,8 +26,18 @@ namespace DateTimeApp {
 
         private void btAge_Click(object sender, EventArgs e) {
             var toDay = DateTime.Now;
-            int age = toDay.Year - dtpBirthday.Value.Year;
+            var birthday = dtpBirthday.Value;
+            int age = GetAge(birthday,toDay);
+
             tbDisp.Text = age.ToString("D")+"歳";
+        }
+        //誕生日に年齢が1歳上がる一般的な年齢を求めるメソッド
+        public static int GetAge(DateTime birthday, DateTime targetDay) {
+            var age = targetDay.Year - birthday.Year;
+            if(targetDay < birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
