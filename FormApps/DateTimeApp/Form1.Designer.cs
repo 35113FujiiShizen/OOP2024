@@ -27,6 +27,10 @@
             btDateCount = new Button();
             tbDisp = new TextBox();
             dtpBirthday = new DateTimePicker();
+            nudDay = new NumericUpDown();
+            btDayBefore = new Button();
+            btDayAfter = new Button();
+            ((System.ComponentModel.ISupportInitialize)nudDay).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -35,13 +39,13 @@
             label1.Font = new Font("Yu Gothic UI", 16F);
             label1.Location = new Point(61, 54);
             label1.Name = "label1";
-            label1.Size = new Size(101, 30);
+            label1.Size = new Size(57, 30);
             label1.TabIndex = 0;
-            label1.Text = "生年月日";
+            label1.Text = "日付";
             // 
             // btDateCount
             // 
-            btDateCount.Location = new Point(61, 120);
+            btDateCount.Location = new Point(262, 122);
             btDateCount.Name = "btDateCount";
             btDateCount.Size = new Size(138, 47);
             btDateCount.TabIndex = 1;
@@ -52,30 +56,64 @@
             // tbDisp
             // 
             tbDisp.Font = new Font("Yu Gothic UI", 20F);
-            tbDisp.Location = new Point(61, 211);
+            tbDisp.Location = new Point(52, 301);
             tbDisp.Name = "tbDisp";
-            tbDisp.Size = new Size(273, 43);
+            tbDisp.Size = new Size(285, 43);
             tbDisp.TabIndex = 2;
             // 
             // dtpBirthday
             // 
-            dtpBirthday.Font = new Font("Yu Gothic UI", 16F);
-            dtpBirthday.Location = new Point(182, 54);
+            dtpBirthday.Font = new Font("Yu Gothic UI", 18F);
+            dtpBirthday.Location = new Point(141, 49);
             dtpBirthday.Name = "dtpBirthday";
-            dtpBirthday.Size = new Size(184, 36);
+            dtpBirthday.Size = new Size(196, 39);
             dtpBirthday.TabIndex = 3;
+            // 
+            // nudDay
+            // 
+            nudDay.Font = new Font("Yu Gothic UI", 18F);
+            nudDay.Location = new Point(52, 198);
+            nudDay.Name = "nudDay";
+            nudDay.Size = new Size(193, 39);
+            nudDay.TabIndex = 4;
+            nudDay.Value = new decimal(new int[] { 20, 0, 0, 0 });
+            // 
+            // btDayBefore
+            // 
+            btDayBefore.Font = new Font("Yu Gothic UI", 18F);
+            btDayBefore.Location = new Point(262, 175);
+            btDayBefore.Name = "btDayBefore";
+            btDayBefore.Size = new Size(131, 43);
+            btDayBefore.TabIndex = 5;
+            btDayBefore.Text = "日前";
+            btDayBefore.UseVisualStyleBackColor = true;
+            btDayBefore.Click += btDayBefore_Click;
+            // 
+            // btDayAfter
+            // 
+            btDayAfter.Font = new Font("Yu Gothic UI", 18F);
+            btDayAfter.Location = new Point(262, 224);
+            btDayAfter.Name = "btDayAfter";
+            btDayAfter.Size = new Size(131, 43);
+            btDayAfter.TabIndex = 5;
+            btDayAfter.Text = "日後";
+            btDayAfter.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(756, 520);
+            Controls.Add(btDayAfter);
+            Controls.Add(btDayBefore);
+            Controls.Add(nudDay);
             Controls.Add(dtpBirthday);
             Controls.Add(tbDisp);
             Controls.Add(btDateCount);
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)nudDay).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -86,5 +124,8 @@
         private Button btDateCount;
         private TextBox tbDisp;
         private DateTimePicker dtpBirthday;
+        private NumericUpDown nudDay;
+        private Button btDayBefore;
+        private Button btDayAfter;
     }
 }
