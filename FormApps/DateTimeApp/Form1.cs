@@ -13,8 +13,8 @@ namespace DateTimeApp {
         }
 
         private void btDayBefore_Click(object sender, EventArgs e) {
-            double doubleValue = Decimal.ToDouble(nudDay.Value);
-            var past = dtpBirthday.Value.AddDays(-(double)doubleValue);
+            //double doubleValue = Decimal.ToDouble(nudDay.Value);
+            var past = dtpBirthday.Value.AddDays(-(double)nudDay.Value);
             tbDisp.Text = past.ToString("D");
         }
 
@@ -25,8 +25,9 @@ namespace DateTimeApp {
         }
 
         private void btAge_Click(object sender, EventArgs e) {
-
-            int age = today.Year - birthDay.Year;
+            var toDay = DateTime.Now;
+            int age = toDay.Year - dtpBirthday.Value.Year;
+            tbDisp.Text = age.ToString("D")+"çŒ";
         }
     }
 }
