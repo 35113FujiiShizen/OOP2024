@@ -34,7 +34,7 @@ namespace DateTimeApp {
         //誕生日に年齢が1歳上がる一般的な年齢を求めるメソッド
         public static int GetAge(DateTime birthday, DateTime targetDay) {
             var age = targetDay.Year - birthday.Year;
-            if(targetDay < birthday.AddYears(age)) {
+            if(targetDay < birthday.AddYears(-age).AddDays(-1)) {
                 age--;
             }
             return age;
