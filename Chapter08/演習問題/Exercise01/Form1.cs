@@ -38,7 +38,7 @@ namespace Exercise01 {
             tw.Start();
             Thread.Sleep(1000);
             TimeSpan duration = tw.Stop();
-            var str = String.Format("ˆ—ŠÔ‚Í{0}‚Å‚µ‚½", duration.TotalNanoseconds);
+            var str = String.Format("ˆ—ŠÔ‚Í{0}ƒ~ƒŠ•b‚Å‚µ‚½", duration.TotalMilliseconds);
             tbDisp.Text += str + "\r\n";
         }
     }
@@ -46,10 +46,11 @@ namespace Exercise01 {
         private DateTime _time;
 
         public void Start() {
+            _time = DateTime.Now;
 
         }
         public TimeSpan Stop() {
-            return 
+            return DateTime.Now - _time;
         }
     }
 }
