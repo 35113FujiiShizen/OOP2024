@@ -27,7 +27,7 @@
             dtpDate = new DateTimePicker();
             label2 = new Label();
             label3 = new Label();
-            cbAuther = new ComboBox();
+            cbAuthor = new ComboBox();
             label4 = new Label();
             label5 = new Label();
             cbCarName = new ComboBox();
@@ -50,6 +50,7 @@
             dgvCarReport = new DataGridView();
             btReportOpen = new Button();
             btReportSave = new Button();
+            ofdPicFileOpen = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
@@ -93,14 +94,14 @@
             label3.TabIndex = 0;
             label3.Text = "メーカー";
             // 
-            // cbAuther
+            // cbAuthor
             // 
-            cbAuther.Font = new Font("Yu Gothic UI", 14F);
-            cbAuther.FormattingEnabled = true;
-            cbAuther.Location = new Point(95, 62);
-            cbAuther.Name = "cbAuther";
-            cbAuther.Size = new Size(121, 33);
-            cbAuther.TabIndex = 2;
+            cbAuthor.Font = new Font("Yu Gothic UI", 14F);
+            cbAuthor.FormattingEnabled = true;
+            cbAuthor.Location = new Point(95, 62);
+            cbAuthor.Name = "cbAuthor";
+            cbAuthor.Size = new Size(121, 33);
+            cbAuthor.TabIndex = 2;
             // 
             // label4
             // 
@@ -152,7 +153,6 @@
             rbOther.Name = "rbOther";
             rbOther.Size = new Size(56, 19);
             rbOther.TabIndex = 5;
-            rbOther.TabStop = true;
             rbOther.Text = "その他";
             rbOther.UseVisualStyleBackColor = true;
             // 
@@ -163,7 +163,6 @@
             rbInport.Name = "rbInport";
             rbInport.Size = new Size(61, 19);
             rbInport.TabIndex = 4;
-            rbInport.TabStop = true;
             rbInport.Text = "輸入車";
             rbInport.UseVisualStyleBackColor = true;
             // 
@@ -174,7 +173,6 @@
             rbSubaru.Name = "rbSubaru";
             rbSubaru.Size = new Size(54, 19);
             rbSubaru.TabIndex = 3;
-            rbSubaru.TabStop = true;
             rbSubaru.Text = "スバル";
             rbSubaru.UseVisualStyleBackColor = true;
             // 
@@ -185,7 +183,6 @@
             rbHonda.Name = "rbHonda";
             rbHonda.Size = new Size(53, 19);
             rbHonda.TabIndex = 2;
-            rbHonda.TabStop = true;
             rbHonda.Text = "ホンダ";
             rbHonda.UseVisualStyleBackColor = true;
             // 
@@ -196,7 +193,6 @@
             rbNissan.Name = "rbNissan";
             rbNissan.Size = new Size(49, 19);
             rbNissan.TabIndex = 1;
-            rbNissan.TabStop = true;
             rbNissan.Text = "日産";
             rbNissan.UseVisualStyleBackColor = true;
             // 
@@ -207,7 +203,6 @@
             rbToyota.Name = "rbToyota";
             rbToyota.Size = new Size(50, 19);
             rbToyota.TabIndex = 0;
-            rbToyota.TabStop = true;
             rbToyota.Text = "トヨタ";
             rbToyota.UseVisualStyleBackColor = true;
             // 
@@ -237,6 +232,7 @@
             btPicOpen.TabIndex = 6;
             btPicOpen.Text = "開く…";
             btPicOpen.UseVisualStyleBackColor = true;
+            btPicOpen.Click += btPicOpen_Click;
             // 
             // btPicDelete
             // 
@@ -246,6 +242,7 @@
             btPicDelete.TabIndex = 6;
             btPicDelete.Text = "削除";
             btPicDelete.UseVisualStyleBackColor = true;
+            btPicDelete.Click += btPicDelete_Click;
             // 
             // pbPicture
             // 
@@ -253,6 +250,7 @@
             pbPicture.Location = new Point(543, 47);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(372, 338);
+            pbPicture.SizeMode = PictureBoxSizeMode.Zoom;
             pbPicture.TabIndex = 7;
             pbPicture.TabStop = false;
             // 
@@ -300,10 +298,13 @@
             dgvCarReport.AllowUserToDeleteRows = false;
             dgvCarReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarReport.Location = new Point(93, 451);
+            dgvCarReport.MultiSelect = false;
             dgvCarReport.Name = "dgvCarReport";
             dgvCarReport.ReadOnly = true;
+            dgvCarReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCarReport.Size = new Size(822, 154);
             dgvCarReport.TabIndex = 8;
+            dgvCarReport.Click += dgvCarReport_Click;
             // 
             // btReportOpen
             // 
@@ -323,6 +324,10 @@
             btReportSave.Text = "保存";
             btReportSave.UseVisualStyleBackColor = true;
             // 
+            // ofdPicFileOpen
+            // 
+            ofdPicFileOpen.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -340,7 +345,7 @@
             Controls.Add(tbReport);
             Controls.Add(groupBox1);
             Controls.Add(cbCarName);
-            Controls.Add(cbAuther);
+            Controls.Add(cbAuthor);
             Controls.Add(dtpDate);
             Controls.Add(label6);
             Controls.Add(label7);
@@ -351,6 +356,7 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "試乗レポート管理システムの作成";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
@@ -365,7 +371,7 @@
         private DateTimePicker dtpDate;
         private Label label2;
         private Label label3;
-        private ComboBox cbAuther;
+        private ComboBox cbAuthor;
         private Label label4;
         private Label label5;
         private ComboBox cbCarName;
@@ -388,5 +394,6 @@
         private DataGridView dgvCarReport;
         private Button btReportOpen;
         private Button btReportSave;
+        private OpenFileDialog ofdPicFileOpen;
     }
 }
