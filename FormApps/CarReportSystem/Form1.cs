@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Reflection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
@@ -22,8 +23,28 @@ namespace CarReportSystem {
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
             };
-            listCarReports.Add(carReport);
+            if (cbAuthor.Text != string.Empty && cbCarName.Text != string.Empty) {
+                listCarReports.Add(carReport);
+                setCbAuthor(cbAuthor.Text);
+                setCbCarName(cbCarName.Text);
+            }
+
         }
+        //記録者の履歴をコンボボックスへ登録（重複なし）
+        private void setCbAuthor(string author) {
+            var idx = cbAuthor.Items.IndexOf(cbAuthor.Text);
+            if (idx == -1) {
+                cbAuthor.Items.Add(author);
+            }
+        }
+        //車名の履歴をコンボボックスへ登録（重複なし）
+        private void setCbCarName(string carName) {
+            var idx = cbCarName.Items.IndexOf(cbCarName.Text);
+            if (idx == -1) {
+                cbCarName.Items.Add(carName);
+            }
+        }
+
         //選択されているメーカー名を列挙型で返す
         private CarReport.MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked) {
@@ -95,7 +116,13 @@ namespace CarReportSystem {
         }
 
         private void btModifyReport_Click(object sender, EventArgs e) {
-
+            listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuthor.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
+            listCarReports[dgvCarReport.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
+            dgvCarReport.Refresh();
         }
     }
 }
