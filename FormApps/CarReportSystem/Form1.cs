@@ -15,6 +15,10 @@ namespace CarReportSystem {
         }
 
         private void btAddReport_Click(object sender, EventArgs e) {
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                tslbMessage.Text = "記録者、または車名が未入力です";
+                return;
+            }
             CarReport carReport = new CarReport {
                 Date = dtpDate.Value,
                 Author = cbAuthor.Text,
@@ -23,11 +27,13 @@ namespace CarReportSystem {
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
             };
-            if (cbAuthor.Text != string.Empty && cbCarName.Text != string.Empty) {
-                listCarReports.Add(carReport);
-                setCbAuthor(cbAuthor.Text);
-                setCbCarName(cbCarName.Text);
-            }
+
+            //if (cbAuthor.Text != string.Empty && cbCarName.Text != string.Empty) {
+            listCarReports.Add(carReport);
+            setCbAuthor(cbAuthor.Text);
+            setCbCarName(cbCarName.Text);
+            tslbMessage.Text = "";
+            //}
 
         }
         //記録者の履歴をコンボボックスへ登録（重複なし）
@@ -98,7 +104,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            dgvCarReport.Columns["Picture"].Visible = false;
+            dgvCarReport.Columns["Picture"].Visible = false;//画像を表示しない
         }
 
         private void dgvCarReport_Click(object sender, EventArgs e) {
@@ -112,10 +118,18 @@ namespace CarReportSystem {
         }
 
         private void btDeleteReport_Click(object sender, EventArgs e) {
+            if (dgvCarReport.CurrentRow == null) {
+                tslbMessage.Text = "データが入力されていません";
+                return;
+            }
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
         }
 
         private void btModifyReport_Click(object sender, EventArgs e) {
+            if (dgvCarReport.CurrentRow == null) {
+                tslbMessage.Text = "データが入力されていません";
+                return;
+            }
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuthor.Text;
             listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
