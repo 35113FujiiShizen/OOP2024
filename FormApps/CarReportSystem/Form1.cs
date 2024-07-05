@@ -13,7 +13,7 @@ namespace CarReportSystem {
             InitializeComponent();
             dgvCarReport.DataSource = listCarReports;
         }
-
+        //追加ボタン
         private void btAddReport_Click(object sender, EventArgs e) {
             if (cbAuthor.Text == "" || cbCarName.Text == "") {
                 tslbMessage.Text = "記録者、または車名が未入力です";
@@ -157,6 +157,10 @@ namespace CarReportSystem {
             if (dgvCarReport.Rows.Count == 0) return;
             if (dgvCarReport.CurrentRow == null) {
                 tslbMessage.Text = "データが入力されていません";
+                return;
+            }
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                tslbMessage.Text = "記録者、または車名が未入力です";
                 return;
             }
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
