@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
@@ -28,7 +29,7 @@ namespace CarReportSystem {
                 Picture = pbPicture.Image,
             };
             listCarReports.Add(carReport);
-            dgvCarReport.ClearSelection();
+            dgvCarReport.ClearSelection();//セレクションを外す
             //if (cbAuthor.Text != string.Empty && cbCarName.Text != string.Empty) {
             inputItemsAllClear();
             //}
@@ -130,9 +131,13 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
             dgvCarReport.Columns["Picture"].Visible = false;//画像を表示しない
+
+            //交互に色を設定（データグリッドビュー）
+            dgvCarReport.RowsDefaultCellStyle.BackColor = Color.AliceBlue;
+            dgvCarReport.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
         }
 
-        //修正ボタン
+
         private void dgvCarReport_Click(object sender, EventArgs e) {
             if ((dgvCarReport.CurrentRow == null)
                 || (!dgvCarReport.CurrentRow.Selected)) return;
@@ -144,6 +149,7 @@ namespace CarReportSystem {
             pbPicture.Image = (Image)dgvCarReport.CurrentRow.Cells["picture"].Value;
         }
 
+        //削除ボタン
         private void btDeleteReport_Click(object sender, EventArgs e) {
             if (dgvCarReport.CurrentRow == null) {
                 tslbMessage.Text = "データが入力されていません";
@@ -177,9 +183,80 @@ namespace CarReportSystem {
         private void cbAuthor_TextChanged(object sender, EventArgs e) {
             tslbMessage.Text = "";
         }
-
+        //車名のテキストが編集されたら
         private void cbCarName_TextChanged(object sender, EventArgs e) {
             tslbMessage.Text = "";
+        }
+        //保存ボタン
+        private void ReportSave_Click(object sender, EventArgs e) {
+            ReportSaveFile();//ファイルセーブ処理
+
+        }
+        //ファイルセーブ処理
+        private void ReportSaveFile() {
+            if (sfdReportFileSave.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+#pragma warning disable SYSLIB0011 // 型またはメンバーが旧型式です
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011 // 型またはメンバーが旧型式です
+                    using (FileStream fs = File.Open(sfdReportFileSave.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReports);
+                    }
+                }
+                catch (Exception) {
+                    tslbMessage.Text = "書き込みエラー";
+                }
+            }
+        }
+
+        //開くボタンイベントハンドラー
+        private void btReportOpen_Click(object sender, EventArgs e) {
+            ReportOpenFile();//ファイルオープン処理
+        }
+        //ファイルオープン処理
+        private void ReportOpenFile() {
+            if (ofdReportFileOpen.ShowDialog() == DialogResult.OK) {
+                try {
+                    //逆シリアル化でバイナリ形式を取り込む
+#pragma warning disable SYSLIB0011 // 型またはメンバーが旧型式です
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011 // 型またはメンバーが旧型式です
+
+                    using (FileStream fs = File.Open(ofdReportFileOpen.FileName, FileMode.Open, FileAccess.Read)) {
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvCarReport.DataSource = listCarReports;
+
+                        foreach (var carReport in listCarReports) {
+                            setCbAuthor(carReport.Author);
+                            setCbCarName(carReport.CarName);
+                        }
+                        tslbMessage.Text = "";
+                    }
+                }
+                catch (Exception ex) {
+                    tslbMessage.Text = "ファイル形式が違います";
+                }
+                dgvCarReport.ClearSelection();//セレクションを外す
+            }
+        }
+
+        private void btClear_Click(object sender, EventArgs e) {
+            inputItemsAllClear();
+        }
+
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+            ReportOpenFile();//ファイルオープン処理
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            ReportSaveFile();//ファイルセーブ処理
+        }
+
+        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (MessageBox.Show ("アプリケーションを終了しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                Application.Exit();
+            }
         }
     }
 }
