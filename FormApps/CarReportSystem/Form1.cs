@@ -150,7 +150,7 @@ namespace CarReportSystem {
             if (File.Exists("settings.xml")) {
                 try {
                     //設定ファイルを逆シリアル化して背景を設定
-                    using (var reader = XmlReader.Create("setting.xml")) {
+                    using (var reader = XmlReader.Create("settings.xml")) {
                         var serializer = new XmlSerializer(typeof(Settings));
                         var setting = serializer.Deserialize(reader) as Settings;
                         BackColor = Color.FromArgb(setting.MainFormColor);
@@ -297,7 +297,7 @@ namespace CarReportSystem {
     private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
         //設定ファイルのシリアル化
         try {
-            using (var writer = XmlWriter.Create("setting.xml")) {
+            using (var writer = XmlWriter.Create("settings.xml")) {
                 var serializer = new XmlSerializer(setting.GetType());
                 serializer.Serialize(writer, setting);
             }
