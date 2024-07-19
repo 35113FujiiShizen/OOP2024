@@ -16,7 +16,6 @@ namespace Exercise01 {
             Console.WriteLine("-----");
             Exercise1_3(file);
             Console.WriteLine("-----");
-
             var newfile = "sports.xml";
             Exercise1_4(file, newfile);
 
@@ -26,9 +25,9 @@ namespace Exercise01 {
             var xdoc = XDocument.Load("Sample.xml");
             var sports = xdoc.Root.Elements();
 
-            foreach (var item in sports){
+            foreach (var item in sports) {
                 var sportname = item.Element("name");
-                Console.Write(sportname.Value+" ");
+                Console.Write(sportname.Value + " ");
                 var teammembers = item.Element("teammembers");
                 Console.WriteLine(teammembers.Value);
             }
@@ -37,22 +36,45 @@ namespace Exercise01 {
         private static void Exercise1_2(string file) {
             var xdoc = XDocument.Load("Sample.xml");
             var sports = xdoc.Root.Elements()
-                                  .OrderByDescending(x=>x.Element("first_played"));
-            foreach (var item in sports){
+                                  .OrderByDescending(x => (int)x.Element("firstplayed"));
+            foreach (var item in sports) {
                 var name = item.Element("name");
                 var namekanji = name.Attribute("kanji").Value;
                 var firstplayed = item.Element("firstplayed").Value;
-                Console.WriteLine(namekanji,firstplayed);
+                Console.WriteLine(namekanji + "," + firstplayed);
             }
 
         }
 
         private static void Exercise1_3(string file) {
+            var xdoc = XDocument.Load("Sample.xml");
+            var sport = xdoc.Root.Elements()
+                                 .OrderByDescending(x => x.Element("teammembers").Value)
+                                 .First();
 
+            Console.WriteLine($"{sport.Element("name").Value}");
+
+            //var sports = xdoc.Root.Elements()
+            //                      .Select(x=>new{
+            //                          Name = x.Element("name").Value,
+            //                          Teammember = x.Element("teammembers").Value,
+            //                        })
+            //                      ;
+            //var maxteammember = sports.Max(x => x.Teammember);
+            //foreach (var item in sports){
+            //    if (maxteammember == item.Teammember) {
+            //        Console.WriteLine(item.Name);
+            //    }    
         }
-
         private static void Exercise1_4(string file, string newfile) {
-
+            var element = new XElement("ballsport",
+                new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
+                new XElement("teammembers", "11"),
+                new XElement("firstplayed", "1848")
+              );
+            var xdoc = XDocument.Load("Sample.xml");
+            xdoc.Root.Add(element);
+            xdoc.Save("Sample2.xml");
         }
     }
 }
