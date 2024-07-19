@@ -67,25 +67,50 @@ namespace Exercise01 {
             //    }    
         }
         private static void Exercise1_4(string file, string newfile) {
-            var element = new XElement("ballsport",
-                new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
-                new XElement("teammembers", "11"),
-                new XElement("firstplayed", "1848")
-              );
+            List<XElement>xElements = new List<XElement>();
+            //var element = new XElement("ballsport",
+            //    new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
+            //    new XElement("teammembers", "11"),
+            //    new XElement("firstplayed", "1848")
+            //  );
             var xdoc = XDocument.Load("Sample.xml");
-            xdoc.Root.Add(element);
-            xdoc.Save(newfile);
-
-            Console.Write("名称：");
-            var name = Console.ReadLine();
-            Console.Write("漢字：");
-            var kanji = Console.ReadLine();
-            Console.Write("人数：");
-            var teammember = Console.ReadLine();
-            Console.Write("起源年：");
-            var firstplayed = Console.ReadLine();
-
-            
+            //xdoc.Root.Add(element);
+            //xdoc.Save(newfile);
+            while (true) {
+                //入力処理
+                Console.Write("名称：");
+                var name = Console.ReadLine();
+                Console.Write("漢字：");
+                var kanji = Console.ReadLine();
+                Console.Write("人数：");
+                var teammember = Console.ReadLine();
+                Console.Write("起源年：");
+                var firstplayed = Console.ReadLine();
+                Console.Write("追加（1）、保存（2）");
+                var num = int.Parse(Console.ReadLine());
+                //一件分の要素作成
+                var element = new XElement("ballsport",
+                            new XElement("name", name, new XAttribute("kanji", kanji)),
+                            new XElement("teammembers", teammember),
+                            new XElement("firstplayed", firstplayed)
+                        );
+                switch (num) {
+                    case 1: // 追加
+                        xdoc.Root.Add(element);
+                        break;
+                    case 2: // 保存
+                        xdoc.Root.Add(element);
+                        xdoc.Save(newfile);
+                        Console.WriteLine("ファイルを保存しました。");
+                        break;
+                    default:
+                        Console.WriteLine("無効な選択です。");
+                        break;
+                }
+                if (num == 2) {
+                    break;
+                }
+            }
         }
     }
 }
