@@ -74,7 +74,18 @@ namespace Exercise01 {
               );
             var xdoc = XDocument.Load("Sample.xml");
             xdoc.Root.Add(element);
-            xdoc.Save("Sample2.xml");
+            xdoc.Save(newfile);
+
+            Console.Write("名称：");
+            var name = Console.ReadLine();
+            Console.Write("漢字：");
+            var kanji = Console.ReadLine();
+            Console.Write("人数：");
+            var teammember = Console.ReadLine();
+            Console.Write("起源年：");
+            var firstplayed = Console.ReadLine();
+
+            
         }
     }
 }
