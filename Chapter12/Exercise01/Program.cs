@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,14 +66,20 @@ namespace Exercise01 {
             }
         }
 
-        private static void Exercise1_3(string v) {
-            foreach (var emp in emps) {
-                Console.WriteLine("[0],[1],[2]")
+        private static void Exercise1_3(string file) {
+            using (var reader = XmlReader.Create(file)) {
+                var serializer = new DataContractSerializer(typeof(Employee[]));
+                var emps = serializer.ReadObject(reader) as Employee[];
+                foreach (var emp in emps) {
+                    Console.WriteLine("{0},{1},{2}", emp.Id, emp.Name, emp.HireDate);
+                }
             }
+
+            
         }
 
-        private static void Exercise1_4(string v) {
-            throw new NotImplementedException();
+        private static void Exercise1_4(string file) {
+            
         }
     }
 }
