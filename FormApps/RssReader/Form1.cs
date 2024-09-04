@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Xml.XPath;
 
 namespace RssReader {
+    //データ格納用クラス
+    public class RssItem {
+        public string Title { get; set; }
+        public string Link { get; set; }
+    }
     public partial class Form1 : Form {
+        List<RssItem> xitems;
         public Form1() {
             InitializeComponent();
         }
@@ -22,16 +23,21 @@ namespace RssReader {
                 var url = wc.OpenRead(tbRssUrl.Text);
                 var xdoc = XDocument.Load(url);
                 //var xitems = xdoc.Root.Descendants("item");
-                var xtitles = xdoc.Root.Descendants("item")
-                                       .Select(item => new {
-                                          title = item.Element("title").Value,
-                                          link = item.Element("link").Value,
-                                       });
-                foreach (var title in xtitles){
-                    lbRssTitle.Items.Add(title.title);
+                xitems = xdoc.Root.Descendants("item")
+                                       .Select(item => new RssItem {
+                                           Title = item.Element("title").Value,
+                                           Link = item.Element("link").Value,
+                                       }).ToList();
+                foreach (var title in xitems) {
+                    lbRssTitle.Items.Add(title.Title);
                 }
 
             }
         }
+
+        private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
+            webView1.Navigate(xitems[lbRssTitle.SelectedIndex].Link);
+        }
     }
+
 }
