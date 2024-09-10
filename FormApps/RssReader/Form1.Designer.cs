@@ -29,6 +29,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.tbReg = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +72,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(500, 20);
             this.comboBox1.TabIndex = 4;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -90,11 +91,31 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "【お気に入り登録】\r\nRSSを入力した状態で登録すること。\r\n";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(203, 77);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(442, 20);
+            this.comboBox2.TabIndex = 7;
+            // 
+            // tbReg
+            // 
+            this.tbReg.Location = new System.Drawing.Point(652, 76);
+            this.tbReg.Name = "tbReg";
+            this.tbReg.Size = new System.Drawing.Size(84, 20);
+            this.tbReg.TabIndex = 8;
+            this.tbReg.Text = "登録";
+            this.tbReg.UseVisualStyleBackColor = true;
+            this.tbReg.Click += new System.EventHandler(this.tbReg_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(917, 631);
+            this.Controls.Add(this.tbReg);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -102,6 +123,7 @@
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.tbGet);
             this.Name = "Form1";
+            this.Text = "YahooニュースRSSリーダー";
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -115,6 +137,8 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button tbReg;
     }
 }
 
