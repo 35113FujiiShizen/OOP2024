@@ -36,7 +36,7 @@
             // 
             // tbGet
             // 
-            this.tbGet.Location = new System.Drawing.Point(652, 24);
+            this.tbGet.Location = new System.Drawing.Point(659, 28);
             this.tbGet.Name = "tbGet";
             this.tbGet.Size = new System.Drawing.Size(85, 20);
             this.tbGet.TabIndex = 1;
@@ -73,7 +73,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(146, 24);
+            this.comboBox1.Location = new System.Drawing.Point(153, 28);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(500, 20);
             this.comboBox1.TabIndex = 4;
@@ -94,19 +94,19 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 24);
             this.label2.TabIndex = 6;
-            this.label2.Text = "【お気に入り登録】\r\nRSSを入力した状態で登録すること。\r\n";
+            this.label2.Text = "【RSSお気に入り登録】\r\nRSSを入力した状態で登録すること。\r\n";
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(203, 77);
+            this.comboBox2.Location = new System.Drawing.Point(211, 74);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(442, 20);
             this.comboBox2.TabIndex = 7;
             // 
             // tbReg
             // 
-            this.tbReg.Location = new System.Drawing.Point(652, 76);
+            this.tbReg.Location = new System.Drawing.Point(659, 74);
             this.tbReg.Name = "tbReg";
             this.tbReg.Size = new System.Drawing.Size(84, 20);
             this.tbReg.TabIndex = 8;

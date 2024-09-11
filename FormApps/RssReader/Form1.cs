@@ -100,8 +100,6 @@ namespace RssReader {
                 }
             }
         }
-
-
     }
     //データ格納用クラス
     public class RssItem {
