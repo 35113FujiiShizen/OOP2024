@@ -24,7 +24,8 @@ namespace SampleEntityFramework
             //DeleteBook();
             //en1AddAuthors();
             //en1AddBooks();
-            DisplayAllBooks();
+            //DisplayAllBooks();
+            DisplayAllBooks2();
         }
         //データの取得
         static IEnumerable<Book> GetBooks()
@@ -36,8 +37,10 @@ namespace SampleEntityFramework
                          .ToList();
             }
         }
-        static IEnumerable<Author> GetAuthor(){
-            using (var db = new BooksDbContext()){
+        static IEnumerable<Author> GetAuthor()
+        {
+            using (var db = new BooksDbContext())
+            {
                 return db.Authors.ToList();
             }
         }
@@ -207,7 +210,8 @@ namespace SampleEntityFramework
                 db.SaveChanges();
             }
         }
-        static void DisplayAllBooks(){
+        static void DisplayAllBooks()
+        {
             var books = GetBooks();
             var authors = GetAuthor();
             foreach (var book in books)
@@ -215,6 +219,20 @@ namespace SampleEntityFramework
                 Console.WriteLine($"{book.Title} {book.PublishedYear}");
             };
             Console.ReadLine();
+        }
+        static void DisplayAllBooks2(){
+            using (var db = new BooksDbContext())
+            {
+                foreach (var book in db.Books.ToList())
+                {
+                    Console.WriteLine(("{0} {1}年 {2} ({3:yyyy/MM/dd})"),
+                        book.Title,
+                        book.PublishedYear,
+                        book.Author.Name,
+                        book.Author.Birthday
+                        );
+                }
+            }
         }
     }
 }
