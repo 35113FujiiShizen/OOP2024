@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,18 +13,18 @@ namespace SampleEntityFramework
     {
         static void Main(string[] args)
         {
-            GetBooks();
-            foreach (var book in GetBooks())
-            {
-                Console.WriteLine(book.Title);
-            }
+            //GetBooks();
+            //foreach (var book in GetBooks()){
+            //    Console.WriteLine(book.Title);
+            //}
             //InsertBooks();
             //AddAuthors();
             //AddBooks();
             //UpdateBook();
             //DeleteBook();
-            en1AddAuthors();
-            en1AddBooks();
+            //en1AddAuthors();
+            //en1AddBooks();
+            DisplayAllBooks();
         }
         //データの取得
         static IEnumerable<Book> GetBooks()
@@ -33,6 +34,11 @@ namespace SampleEntityFramework
                 return db.Books
                          //.Where(book => book.Author.Name.StartsWith("夏目"))
                          .ToList();
+            }
+        }
+        static IEnumerable<Author> GetAuthor(){
+            using (var db = new BooksDbContext()){
+                return db.Authors.ToList();
             }
         }
 
@@ -200,6 +206,15 @@ namespace SampleEntityFramework
                 db.Books.Add(book4);
                 db.SaveChanges();
             }
+        }
+        static void DisplayAllBooks(){
+            var books = GetBooks();
+            var authors = GetAuthor();
+            foreach (var book in books)
+            {
+                Console.WriteLine($"{book.Title} {book.PublishedYear}");
+            };
+            Console.ReadLine();
         }
     }
 }
