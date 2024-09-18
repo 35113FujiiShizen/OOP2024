@@ -1,6 +1,7 @@
 ﻿using SampleEntityFramework.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO.Pipes;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -26,6 +27,51 @@ namespace SampleEntityFramework
             //en1AddBooks();
             //DisplayAllBooks();
             DisplayAllBooks2();
+            Console.WriteLine();
+            Console.WriteLine("#1.3");
+            DisplayAllbooks3();
+
+            Console.WriteLine();
+            Console.WriteLine("#1.4");
+            Exercise1_4();
+
+            Console.WriteLine();
+            Console.WriteLine("#1.5");
+            Exercise1_5();
+
+            Console.ReadLine(); //コンソールアプリだが F5 でデバッグ実行したいために記述
+        }
+
+        private static void Exercise1_4()
+        {
+            using (var db = new BooksDbContext())
+            {
+                var books = db.Books
+                    .Include(nameof(Author))
+                    .OrderBy(b => b.PublishedYear)
+                    .Take(3);
+                foreach (var book in books)
+                {
+                    Console.WriteLine($"{book.Title},{book.Author.Name}");
+                }
+            }
+        }
+
+        private static void Exercise1_5()
+        {
+            using (var db = new BooksDbContext())
+            {
+                var authors = db.Authors.OrderByDescending(a => a.Birthday).ToList();//即時実行でauthorをすべて持ってくる
+                foreach (var author in authors)
+                {
+                    Console.WriteLine("{0}", author.Name);
+                    foreach (var book in author.Books)
+                    {
+                        Console.WriteLine("  {0},{1}", book.Title, book.PublishedYear);
+                    }
+
+                }
+            }
         }
         //データの取得
         static IEnumerable<Book> GetBooks()
@@ -148,7 +194,7 @@ namespace SampleEntityFramework
                 }
             }
         }
-
+        //書籍の追加Exercise1_1
         public static void en1AddAuthors()
         {
             using (var db = new BooksDbContext())
@@ -210,6 +256,7 @@ namespace SampleEntityFramework
                 db.SaveChanges();
             }
         }
+        //テーブルの全表示
         static void DisplayAllBooks()
         {
             var books = GetBooks();
@@ -220,7 +267,9 @@ namespace SampleEntityFramework
             };
             Console.ReadLine();
         }
-        static void DisplayAllBooks2(){
+        //Exercise1_2
+        static void DisplayAllBooks2()
+        {
             using (var db = new BooksDbContext())
             {
                 foreach (var book in db.Books.ToList())
@@ -232,6 +281,21 @@ namespace SampleEntityFramework
                         book.Author.Birthday
                         );
                 }
+            }
+        }
+        //Exercise1_3
+
+        static void DisplayAllbooks3()
+        {
+            using (var db = new BooksDbContext())
+            {
+                var books = db.Books
+                     .Where(b => b.Title.Length == db.Books.Max(x => x.Title.Length));
+                foreach (var book in books)
+                {
+                    Console.WriteLine(book.Title);
+                }
+
             }
         }
     }
