@@ -31,6 +31,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tbReg = new System.Windows.Forms.Button();
+            this.tbdel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,11 +115,22 @@
             this.tbReg.UseVisualStyleBackColor = true;
             this.tbReg.Click += new System.EventHandler(this.tbReg_Click);
             // 
+            // tbdel
+            // 
+            this.tbdel.Location = new System.Drawing.Point(750, 74);
+            this.tbdel.Name = "tbdel";
+            this.tbdel.Size = new System.Drawing.Size(75, 23);
+            this.tbdel.TabIndex = 9;
+            this.tbdel.Text = "取消";
+            this.tbdel.UseVisualStyleBackColor = true;
+            this.tbdel.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(917, 631);
+            this.Controls.Add(this.tbdel);
             this.Controls.Add(this.tbReg);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label2);
@@ -144,6 +156,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button tbReg;
+        private System.Windows.Forms.Button tbdel;
     }
 }
 

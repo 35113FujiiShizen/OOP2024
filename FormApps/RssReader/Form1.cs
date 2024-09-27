@@ -48,6 +48,7 @@ namespace RssReader {
                                                    Title = item.Element("title").Value,
                                                    Link = item.Element("link").Value,
                                                }).ToList();
+                        lbRssTitle.Items.Clear();
                         foreach (var title in xitems) {
                             lbRssTitle.Items.Add(title.Title);
                         }
@@ -62,6 +63,7 @@ namespace RssReader {
                                                    Title = item.Element("title").Value,
                                                    Link = item.Element("link").Value,
                                                }).ToList();
+                        lbRssTitle.Items.Clear();
                         foreach (var title in xitems) {
                             lbRssTitle.Items.Add(title.Title);
                         }
@@ -78,10 +80,16 @@ namespace RssReader {
         }
         private void tbReg_Click(object sender, EventArgs e) {
             if (comboBox2.Text != "" && comboBox1.Text != "") {
-                comboBox1.Items.Add(comboBox2.Text);
-                rssDict.Add(comboBox2.Text, comboBox1.Text);
-                comboBox1.Text = "";
-                comboBox2.Text = "";
+                if (rssDict.Values.Contains("http"))
+                {
+                    comboBox1.Items.Add(comboBox2.Text);
+                    rssDict.Add(comboBox2.Text, comboBox1.Text);
+                    comboBox1.Text = "";
+                    comboBox2.Text = "";
+                } else{
+
+                };
+                
             } else {
                 MessageBox.Show("URLまたはお気に入り登録欄もしくはその両方が未入力です。",
                 "エラー",
@@ -99,6 +107,11 @@ namespace RssReader {
                     webView21.Source = new Uri(selectedItem.Link);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
     //データ格納用クラス
