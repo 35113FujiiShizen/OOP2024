@@ -86,8 +86,6 @@ namespace RssReader {
                     rssDict.Add(comboBox2.Text, comboBox1.Text);
                     comboBox1.Text = "";
                     comboBox2.Text = "";
-                } else{
-
                 };
                 
             } else {
