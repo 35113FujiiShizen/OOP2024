@@ -80,22 +80,35 @@ namespace RssReader {
         }
         private void tbReg_Click(object sender, EventArgs e) {
             if (comboBox2.Text != "" && comboBox1.Text != "") {
-                if (rssDict.Values.Contains("http"))
-                {
+                if (comboBox1.Text.Contains("http")) {
                     comboBox1.Items.Add(comboBox2.Text);
                     rssDict.Add(comboBox2.Text, comboBox1.Text);
                     comboBox1.Text = "";
                     comboBox2.Text = "";
                 };
-                
+
             } else {
                 MessageBox.Show("URLまたはお気に入り登録欄もしくはその両方が未入力です。",
                 "エラー",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             }
-            
         }
+        private void tbdel_Click(object sender, EventArgs e) {
+            if (rssDict.Count > 0) {
+                var lastKey = rssDict.Keys.Last();
+                rssDict.Remove(lastKey);
+                lbRssTitle.Items.Clear();
+                comboBox1.Items.Clear();
+                foreach (var key in rssDict.Keys) {
+                    comboBox1.Items.Add(key);
+                }
+
+                comboBox1.Text = "";
+                comboBox2.Text = "";
+            }
+        }
+
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
             if (lbRssTitle.SelectedItem != null) {
                 var selectedTitle = lbRssTitle.SelectedItem.ToString();
@@ -105,11 +118,6 @@ namespace RssReader {
                     webView21.Source = new Uri(selectedItem.Link);
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
     //データ格納用クラス
