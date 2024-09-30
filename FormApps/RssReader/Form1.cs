@@ -103,7 +103,6 @@ namespace RssReader {
                 foreach (var key in rssDict.Keys) {
                     comboBox1.Items.Add(key);
                 }
-
                 comboBox1.Text = "";
                 comboBox2.Text = "";
             }
