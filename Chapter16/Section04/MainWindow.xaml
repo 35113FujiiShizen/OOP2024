@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="bt_16_10"  Content="HttpClientの簡単な例" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="158" Click="bt_16_10_Click"/>
+        <Button x:Name="bt_16_10"  Content="HttpClientの簡単な例" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="140" Click="bt_16_10_Click"/>
+        <Button x:Name="bt_16_11"  Content="HttpClientの応用" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top" Height="31" Width="140" Click="bt_16_11_Click"/>
+        <Button x:Name="bt_16_23"  Content="HttpClientでの並列処理" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Height="31" Width="140" Click="bt_16_23_Click"/>
         <ScrollViewer Margin="3,35,3,0">
             <TextBlock x:Name="textBlock" TextWrapping="Wrap"></TextBlock>
         </ScrollViewer>
