@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18B375E3-7CCF-426E-8DA6-0E8661DDC074}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>TextFileProcessor</RootNamespace>
-    <AssemblyName>TextFileProcessor</AssemblyName>
+    <ProjectGuid>{5188EBD6-82A0-41BE-87E2-434FC6C1FEB9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LineCounter</RootNamespace>
+    <AssemblyName>LineCounter</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,11 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LineCounterProcessor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TextFileProcessor\TextFileProcessor.csproj">
+      <Project>{18b375e3-7ccf-426e-8da6-0e8661ddc074}</Project>
+      <Name>TextFileProcessor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
