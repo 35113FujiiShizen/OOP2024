@@ -15,6 +15,24 @@ namespace DistanceConverter {
         public override string UnitName { get { return "メートル"; } }
     }
 
+    public class KiroMeterConverter : ConverterBase {
+        public override bool IsMyUnit(string name) {
+            return name.ToLower() == "kirometer" || name == UnitName;
+        }
+        protected override double Ratio { get { return 1000; } }
+        public override string UnitName { get { return "キロメートル"; } }
+    }
+
+    public class MileConverter : ConverterBase {
+        public override bool IsMyUnit(string name) {
+            return name.ToLower() == "Mile" || name == UnitName;
+        }
+        protected override double Ratio { get { return 1609.34; } }
+        public override string UnitName { get { return "マイル"; } }
+    }
+
+
+
     public class FeetConverter : ConverterBase {
         public override bool IsMyUnit(string name) {
             return name.ToLower() == "feet" || name == UnitName;
