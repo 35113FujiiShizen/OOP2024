@@ -31,7 +31,6 @@ namespace TextNumberSizeChange {
         protected override void Terminate() {
             Console.WriteLine("{0}行",_count);
             Console.WriteLine(_text);
-
         }
     }
 }
