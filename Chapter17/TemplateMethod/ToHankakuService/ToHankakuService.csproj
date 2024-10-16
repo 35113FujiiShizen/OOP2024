@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06D92363-CC8C-4E66-9B0B-63D5977D965E}</ProjectGuid>
+    <ProjectGuid>{B323C0FD-7AD6-47BF-B055-98E301C0FE06}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LineCounter</RootNamespace>
-    <AssemblyName>LineCounter</AssemblyName>
+    <RootNamespace>ToHankakuService</RootNamespace>
+    <AssemblyName>ToHankakuService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,20 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\ITextFileService.cs" />
-    <Compile Include="Framework\TextFileProcessor.cs" />
-    <Compile Include="ToHankakuProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TextFileProcessor\TextFileProcessor.csproj">
-      <Project>{18b375e3-7ccf-426e-8da6-0e8661ddc074}</Project>
-      <Name>TextFileProcessor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
