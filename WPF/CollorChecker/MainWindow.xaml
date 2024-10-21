@@ -31,15 +31,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="R" VerticalAlignment="Center" FontSize="20"/>
-            <Slider x:Name="rSlider" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center" Width="120"/>
+            <Slider x:Name="rSlider" Maximum="255" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center" Width="120" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="rValue" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="40" Height="20"/>
             
             <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="G" VerticalAlignment="Center" FontSize="20"/>
-            <Slider x:Name="gSlider" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
+            <Slider x:Name="gSlider" Maximum="255" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="120" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="gValue" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="40" Height="20"/>
             
             <TextBlock HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" FontSize="20"/>
-            <Slider x:Name="bSlider" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
+            <Slider x:Name="bSlider" Maximum="255" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="120" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="bValue" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="40" Height="20"/>
             
             <ComboBox x:Name="colorSelectComboBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
@@ -51,7 +51,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button x:Name="stockButton" Content="STOCK" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="210" FontSize="20" FontWeight="Bold" BorderBrush="Black" Foreground="Black" Background="#FFF93ABD"/>
-            <ListBox x:Name="stockList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5} "/>
         </Grid>
     </Grid>
 </Window>
