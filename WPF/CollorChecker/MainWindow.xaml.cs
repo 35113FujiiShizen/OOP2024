@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,22 +20,46 @@ namespace CollorChecker {
     /// </summary>
     public partial class MainWindow : Window {
         private byte alpha = 255; // alphaをフィールドとして定義
-
+        private MemoryStream saveMemoryStrem;
+        MyColor currentColor = new MyColor();
         public MainWindow() {
             InitializeComponent();
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            var rvalue = (int)rSlider.Value;
-            rValue.Text = rvalue.ToString();
-            var gvalue = (int)gSlider.Value;
-            gValue.Text = gvalue.ToString();
-            var bvalue = (int)bSlider.Value;
-            bValue.Text = bvalue.ToString();
-            byte alpha = 255;
 
-            
-            colorArea.Background = new SolidColorBrush(Color.FromArgb(alpha, (byte)rvalue, (byte)gvalue, (byte)bvalue));
+            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+                colorArea.Background = new SolidColorBrush(currentColor.Color);
+            //var rvalue = (int)rSlider.Value;
+            //rValue.Text = rvalue.ToString();
+            //var gvalue = (int)gSlider.Value;
+            //gValue.Text = gvalue.ToString();
+            //var bvalue = (int)bSlider.Value;
+            //bValue.Text = bvalue.ToString();
+            //byte alpha = 255;
+            //colorArea.Background = new SolidColorBrush(Color.FromArgb(alpha, (byte)rvalue, (byte)gvalue, (byte)bvalue));
+        }
+
+        private void stockButton_Click(object sender, RoutedEventArgs e) {
+            stockList.Items.Insert(0,currentColor);
+            //var rvalue = (int)rSlider.Value;
+            //var gvalue = (int)gSlider.Value;
+            //var bvalue = (int)bSlider.Value;
+            //var color = new MyColor {
+            //    Color = Color.FromArgb(alpha, (byte)rvalue, (byte)gvalue, (byte)bvalue)
+            //};
+
+            //stockList.Items.Add(color);
+
+
+        }
+
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (stockList.SelectedItem is MyColor selectedColor) {
+                rValue.Text = selectedColor.Color.R.ToString();
+                gValue.Text = selectedColor.Color.G.ToString();
+                bValue.Text = selectedColor.Color.B.ToString();
+            }
         }
     }
 }
