@@ -33,16 +33,29 @@
             <TextBlock HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="R" VerticalAlignment="Center" FontSize="20"/>
             <Slider x:Name="rSlider" Maximum="255" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center" Width="120" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="rValue" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="{Binding ElementName=rSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:0}}" VerticalAlignment="Center" Width="40" Height="20" />
-            
+
             <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="G" VerticalAlignment="Center" FontSize="20"/>
             <Slider x:Name="gSlider" Maximum="255" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="120" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="gValue" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="{Binding ElementName=gSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:0}}" VerticalAlignment="Center" Width="40" Height="20"/>
-            
+
             <TextBlock HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" FontSize="20"/>
             <Slider x:Name="bSlider" Maximum="255" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="120" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="bValue" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ElementName=bSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:0}}" VerticalAlignment="Center" Width="40" Height="20"/>
-            
-            <ComboBox x:Name="colorSelectComboBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
+
+            <ComboBox x:Name="colorSelectComboBox" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="130" SelectionChanged="colorSelectComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Color}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
 
         <Grid Grid.Column="2">

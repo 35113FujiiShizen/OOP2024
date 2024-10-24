@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,8 +24,16 @@ namespace CollorChecker {
         private byte alpha = 255; // alphaをフィールドとして定義
         private MemoryStream saveMemoryStrem;
         MyColor currentColor;// = new MyColor();　構造体にしたからnewは不要
+        private MyColor previousStockedColor = default;
         public MainWindow() {
             InitializeComponent();
+            currentColor.Color = Color.FromArgb(255, 0, 0, 0);
+            colorSelectComboBox.DataContext = GetColorList();
+        }
+
+        private MyColor[] GetColorList() {
+            return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -40,8 +49,11 @@ namespace CollorChecker {
             //colorArea.Background = new SolidColorBrush(Color.FromArgb(alpha, (byte)rvalue, (byte)gvalue, (byte)bvalue));
         }
 
-        private void stockButton_Click(object sender, RoutedEventArgs e) {            
-            stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
+        private void stockButton_Click(object sender, RoutedEventArgs e) {
+            if (!currentColor.Color.Equals(previousStockedColor.Color)) {
+                stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
+                previousStockedColor = currentColor;
+            }
             //var rvalue = (int)rSlider.Value;
             //var gvalue = (int)gSlider.Value;
             //var bvalue = (int)bSlider.Value;
@@ -56,6 +68,15 @@ namespace CollorChecker {
             rValue.Text = selectedItem.Color.R.ToString();
             gValue.Text = selectedItem.Color.G.ToString();
             bValue.Text = selectedItem.Color.B.ToString();
+        }
+
+        private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
+            //var color = mycolor.Color;
+            //var name = mycolor.Name;
+            rValue.Text = mycolor.Color.R.ToString();
+            gValue.Text = mycolor.Color.G.ToString();
+            bValue.Text = mycolor.Color.B.ToString();
         }
     }
 }
