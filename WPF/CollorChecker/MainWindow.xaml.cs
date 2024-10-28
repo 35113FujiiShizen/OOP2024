@@ -28,7 +28,7 @@ namespace CollorChecker {
         public MainWindow() {
             InitializeComponent();
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
-            colorSelectComboBox.DataContext = GetColorList();
+            DataContext = GetColorList();
         }
 
         private MyColor[] GetColorList() {
@@ -53,7 +53,9 @@ namespace CollorChecker {
             if (!currentColor.Color.Equals(previousStockedColor.Color)) {
                 stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
                 previousStockedColor = currentColor;
-            }
+            } else if(currentColor.Color.Equals(previousStockedColor.Color)) {
+                MessageBox.Show("既にその色は登録済みです！");
+            } 
             //var rvalue = (int)rSlider.Value;
             //var gvalue = (int)gSlider.Value;
             //var bvalue = (int)bSlider.Value;
