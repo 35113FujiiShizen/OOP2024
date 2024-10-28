@@ -53,6 +53,9 @@ namespace CollorChecker {
             if (!currentColor.Color.Equals(previousStockedColor.Color)) {
                 stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
                 previousStockedColor = currentColor;
+                if (currentColor.Color.Equals(previousStockedColor.Color)) {
+
+                }
             } else if(currentColor.Color.Equals(previousStockedColor.Color)) {
                 MessageBox.Show("既にその色は登録済みです！");
             } 
@@ -67,6 +70,10 @@ namespace CollorChecker {
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var selectedItem = (MyColor)stockList.SelectedItem;
+            setSliderText(selectedItem);
+        }
+
+        private void setSliderText(MyColor selectedItem) {
             rValue.Text = selectedItem.Color.R.ToString();
             gValue.Text = selectedItem.Color.G.ToString();
             bValue.Text = selectedItem.Color.B.ToString();
@@ -74,11 +81,7 @@ namespace CollorChecker {
 
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
-            //var color = mycolor.Color;
-            //var name = mycolor.Name;
-            rValue.Text = mycolor.Color.R.ToString();
-            gValue.Text = mycolor.Color.G.ToString();
-            bValue.Text = mycolor.Color.B.ToString();
+            setSliderText((MyColor)mycolor);
         }
     }
 }
