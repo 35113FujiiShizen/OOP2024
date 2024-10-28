@@ -20,6 +20,8 @@ namespace CollorChecker {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window {
         private byte alpha = 255; // alphaをフィールドとして定義
         private MemoryStream saveMemoryStrem;
@@ -37,8 +39,7 @@ namespace CollorChecker {
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
-            colorArea.Background = new SolidColorBrush(currentColor.Color);
+            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);            colorArea.Background = new SolidColorBrush(currentColor.Color);
             //var rvalue = (int)rSlider.Value;
             //rValue.Text = rvalue.ToString();
             //var gvalue = (int)gSlider.Value;
@@ -53,9 +54,6 @@ namespace CollorChecker {
             if (!currentColor.Color.Equals(previousStockedColor.Color)) {
                 stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
                 previousStockedColor = currentColor;
-                if (currentColor.Color.Equals(previousStockedColor.Color)) {
-
-                }
             } else if(currentColor.Color.Equals(previousStockedColor.Color)) {
                 MessageBox.Show("既にその色は登録済みです！");
             } 
@@ -80,8 +78,11 @@ namespace CollorChecker {
         }
 
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
-            setSliderText((MyColor)mycolor);
+            var mycolor = currentColor =(MyColor)((ComboBox)sender).SelectedItem;
+            //各スライダーの値を設定
+            setSliderText(mycolor);
+            currentColor.Name = mycolor.Name;//Nameプロパティの文字列を再設定
+
         }
     }
 }

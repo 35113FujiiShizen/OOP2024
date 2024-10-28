@@ -12,7 +12,7 @@ namespace CollorChecker {
         public Color Color { get; set; }
         public String Name { get; set; }
         public override string ToString() {
-            return "R："+Color.R+"　G："+Color.G+"　B："+Color.B;
+            return Name ?? string.Format("R："+Color.R+"　G："+Color.G+"　B："+Color.B);
         }
     }
 }
