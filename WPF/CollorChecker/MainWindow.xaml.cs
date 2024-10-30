@@ -40,6 +40,7 @@ namespace CollorChecker {
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);            colorArea.Background = new SolidColorBrush(currentColor.Color);
+            currentColor.Name = null;
             //var rvalue = (int)rSlider.Value;
             //rValue.Text = rvalue.ToString();
             //var gvalue = (int)gSlider.Value;
@@ -54,6 +55,7 @@ namespace CollorChecker {
             if (!currentColor.Color.Equals(previousStockedColor.Color)) {
                 stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
                 previousStockedColor = currentColor;
+                
             } else if(currentColor.Color.Equals(previousStockedColor.Color)) {
                 MessageBox.Show("既にその色は登録済みです！");
             } 
@@ -67,8 +69,10 @@ namespace CollorChecker {
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var selectedItem = (MyColor)stockList.SelectedItem;
-            setSliderText(selectedItem);
+            if (stockList.SelectedItem != null) {
+                MyColor selectedItem = (MyColor)stockList.SelectedItem; 
+                setSliderText(selectedItem);
+            }
         }
 
         private void setSliderText(MyColor selectedItem) {
@@ -83,6 +87,14 @@ namespace CollorChecker {
             setSliderText(mycolor);
             currentColor.Name = mycolor.Name;//Nameプロパティの文字列を再設定
 
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e) {
+            if (stockList.SelectedItem != null) {
+                stockList.Items.Remove(stockList.SelectedItem);
+            } else {
+                MessageBox.Show("削除する色を選択してください！");
+            }
         }
     }
 }

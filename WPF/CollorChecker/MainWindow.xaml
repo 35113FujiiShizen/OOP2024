@@ -60,11 +60,13 @@
 
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button x:Name="stockButton" Content="STOCK" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="210" FontSize="20" FontWeight="Bold" BorderBrush="Black" Foreground="Black" Background="#FFF93ABD" Click="stockButton_Click"/>
             <ListBox x:Name="stockList" Grid.Row="1" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5} " SelectionChanged="stockList_SelectionChanged"/>
+            <Button x:Name="deleteButton" Grid.Row="2" Content="削除" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="210" FontSize="20" FontWeight="Bold" BorderBrush="Black" Foreground="Black" Background="#FFF93ABD" Click="deleteButton_Click" Margin="0,1,0,0"/>
         </Grid>
     </Grid>
 </Window>
