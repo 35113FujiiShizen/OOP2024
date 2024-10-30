@@ -39,8 +39,11 @@ namespace CollorChecker {
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);            colorArea.Background = new SolidColorBrush(currentColor.Color);
+            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+            colorArea.Background = new SolidColorBrush(currentColor.Color);
             currentColor.Name = null;
+            colorArea.Background = new SolidColorBrush(currentColor.Color);
+
             //var rvalue = (int)rSlider.Value;
             //rValue.Text = rvalue.ToString();
             //var gvalue = (int)gSlider.Value;
@@ -52,6 +55,8 @@ namespace CollorChecker {
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
+            //既に登録されている場合は登録しない。
+            currentColor.Name = GetColorList().FirstOrDefault(c => c.Color.Equals(currentColor.Color)).Name;
             if (!currentColor.Color.Equals(previousStockedColor.Color)) {
                 stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
                 previousStockedColor = currentColor;
