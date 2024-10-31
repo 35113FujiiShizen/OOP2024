@@ -27,6 +27,7 @@ namespace CollorChecker {
         private MemoryStream saveMemoryStrem;
         MyColor currentColor;// = new MyColor();　構造体にしたからnewは不要
         private MyColor previousStockedColor = default;
+        private MyColor[] colorsTable;
         public MainWindow() {
             InitializeComponent();
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
@@ -38,12 +39,14 @@ namespace CollorChecker {
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
+        //スライドを動かすと呼ばれるイベントハンドラー
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
             colorArea.Background = new SolidColorBrush(currentColor.Color);
             currentColor.Name = null;
             colorArea.Background = new SolidColorBrush(currentColor.Color);
 
+            
             //var rvalue = (int)rSlider.Value;
             //rValue.Text = rvalue.ToString();
             //var gvalue = (int)gSlider.Value;
@@ -57,6 +60,8 @@ namespace CollorChecker {
         private void stockButton_Click(object sender, RoutedEventArgs e) {
             //既に登録されている場合は登録しない。
             currentColor.Name = GetColorList().FirstOrDefault(c => c.Color.Equals(currentColor.Color)).Name;
+
+            
             if (!currentColor.Color.Equals(previousStockedColor.Color)) {
                 stockList.Items.Insert(0, currentColor);//MyColorを構造体にすることで参照型ではなく値型と同じようになる。
                 previousStockedColor = currentColor;
