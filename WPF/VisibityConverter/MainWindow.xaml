@@ -7,9 +7,38 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="250" Width="300">
     <Window.Resources>
-        <SolidColorBrush x:Key="ButtonBrushKey" Color="Aqua"/>
+        <DataTemplate DataType="{x:Type local:ColorViewModel}">
+            <StackPanel Orientation="Horizontal">
+
+                <Rectangle Width="12" Height="12">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding Color}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Margin="2" Text="{Binding Name}"/>
+            </StackPanel>
+        </DataTemplate>
+        
+        
+        
+        <Style x:Key="EllipseButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter
+                                Margin="{TemplateBinding Padding}"
+                                RecognizesAccessKey="True"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    
+
     <StackPanel>
         <StackPanel.Resources>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -21,26 +50,17 @@
                                          ElementName=ChaekBox,
                                          Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="20,0,0,0">
-            <RadioButton Content="赤">
-                
-            </RadioButton>
-            <RadioButton Content="青">
-                
-            </RadioButton>
-            <RadioButton Content="緑">
-                
-            </RadioButton>
+            <RadioButton Content="赤" Click="RadioButton_Click"/>
+            <RadioButton Content="青" Click="RadioButton_Click"/>
+            <RadioButton Content="緑" Click="RadioButton_Click"/>
+
         </StackPanel>
-        <Button Margin="10" Content="ボタン１" Background="{DynamicResource ButtonBrushKey}">
+        <Button Content="ボタン１" Style="{StaticResource EllipseButton}"
+                Background="Gray" Click="Button_Click">
         </Button>
-        <Button Margin="10" Content="ボタン２" Background="{DynamicResource ButtonBrushKey}"/>
-        <Button Margin="10" Content="ボタン３">
-            <Button.Resources>
-                <SolidColorBrush x:Key="BlueVioletBrushKey" Color="BlueViolet"/>
-            </Button.Resources>
-            <Button.Background>
-                <StaticResource ResourceKey="BlueVioletBrushKey"/>
-            </Button.Background>
+        <Button  Content="ボタン２" Padding="2"
+                 Background="LightBlue" Style="{StaticResource EllipseButton}">
         </Button>
+        <ComboBox ItemsSource="{x:Static local:ColorViewModel.ColorList}"/>
     </StackPanel>
 </Window>
