@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="MainWindow" Height="550" Width="300">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -21,18 +23,25 @@
                 <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="電話番号" Grid.Row="1" Grid.Column="0"/>
                 <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"/>
+                <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
             </Grid>
-            
-                
-                
-            
-            
-                
-                
-            
-            
             <Button Content="Save" x:Name="Savebutton" Click="Savebutton_Click"/>
             <Button Content="Read" x:Name="Readbutton" Click="Readbutton_Click"/>
+
+            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="400">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Id}"/>
+                            <TextBlock Text="{Binding Name}" FontSize="20"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
+                            <TextBlock Text="{Binding Address}" Foreground="Green"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
         </StackPanel>
     </Grid>
 </Window>

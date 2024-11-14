@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CustomerApp {
+namespace CustomerApp{
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
@@ -29,25 +30,24 @@ namespace CustomerApp {
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
+                Address = AddressTextBox.Text,
             };
-            var databaseName = "Shop.db";
-            var folderPass = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var databasePass = System.IO.Path.Combine(folderPass, databaseName);
 
-            using (var connection = new SQLiteConnection(databasePass)) {
+
+            using(var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
             }
         }
 
         private void Readbutton_Click(object sender, RoutedEventArgs e) {
-            var databaseName = "Shop.db";
-            var folderPass = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var databasePass = System.IO.Path.Combine(folderPass, databaseName);
+            
 
-            using (var connection = new SQLiteConnection(databasePass)) {
+            using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 var customers = connection.Table<Customer>().ToList();
+
+                CustomerListView.ItemsSource = customers;
             }
         }
     }
