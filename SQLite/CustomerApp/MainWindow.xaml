@@ -8,9 +8,29 @@
         Title="MainWindow" Height="300" Width="300">
     <Grid>
         <StackPanel Margin="10">
-            <TextBox x:Name="NameTextBox"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="名前" Grid.Row="0" Grid.Column="0"/>
+                <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="電話番号" Grid.Row="1" Grid.Column="0"/>
+                <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
             
-            <TextBox x:Name="PhoneTextBox"/>
+                
+                
+            
+            
+                
+                
+            
+            
             <Button Content="Save" x:Name="Savebutton" Click="Savebutton_Click"/>
             <Button Content="Read" x:Name="Readbutton" Click="Readbutton_Click"/>
         </StackPanel>
