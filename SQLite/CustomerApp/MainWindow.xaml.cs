@@ -34,15 +34,19 @@ namespace CustomerApp {
         }
 
         private void Savebutton_Click(object sender, RoutedEventArgs e) {
+            if (string.IsNullOrEmpty(NameTextBox.Text) && string.IsNullOrEmpty(AddressTextBox.Text) && string.IsNullOrEmpty(PhoneTextBox.Text)) {
+                MessageBox.Show("何も入力されていません");
+                return;
+            }
+            if (string.IsNullOrEmpty(NameTextBox.Text) || string.IsNullOrEmpty(AddressTextBox.Text) || string.IsNullOrEmpty(PhoneTextBox.Text)) {
+                MessageBox.Show("名前、住所、電話番号のいずれかが未入力です");
+                return;
+            }
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
             };
-            if (customer == null) {
-                MessageBox.Show("何も入力されていません");
-                return;
-            }
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
@@ -52,12 +56,12 @@ namespace CustomerApp {
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
-            if (item == null) {
+            if (string.IsNullOrEmpty(NameTextBox.Text) && string.IsNullOrEmpty(AddressTextBox.Text) && string.IsNullOrEmpty(PhoneTextBox.Text)) {
                 MessageBox.Show("何も入力されていません");
                 return;
             }
             if (string.IsNullOrEmpty(NameTextBox.Text) || string.IsNullOrEmpty(AddressTextBox.Text) || string.IsNullOrEmpty(PhoneTextBox.Text)) {
-                MessageBox.Show("名前、住所、電話番号のいずれか、またはその全てが未入力です");
+                MessageBox.Show("名前、住所、電話番号のいずれかが未入力です");
                 return;
             }
             item.Name = NameTextBox.Text;
