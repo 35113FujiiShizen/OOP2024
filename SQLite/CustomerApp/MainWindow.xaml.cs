@@ -25,6 +25,12 @@ namespace CustomerApp {
         List<Customer> _customers;
         public MainWindow() {
             InitializeComponent();
+            ReadDatabase();
+        }
+        private void InputItemsAllClear() {
+            NameTextBox.Text = "";
+            PhoneTextBox.Text = "";
+            AddressTextBox.Text = "";
         }
 
         private void Savebutton_Click(object sender, RoutedEventArgs e) {
@@ -37,11 +43,18 @@ namespace CustomerApp {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
                 ReadDatabase();
+                InputItemsAllClear();
+            }
+            if (customer == null) {
+                MessageBox.Show("何も入力されていません");
+                return;
             }
         }
 
-        private void Readbutton_Click(object sender, RoutedEventArgs e) {
+        private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             ReadDatabase();
+            var item = CustomerListView.SelectedItem as Customer;
+
         }
 
         private void ReadDatabase() {
@@ -49,6 +62,7 @@ namespace CustomerApp {
                 connection.CreateTable<Customer>();
                 _customers = connection.Table<Customer>().ToList();
                 CustomerListView.ItemsSource = _customers;
+                InputItemsAllClear();
             }
         }
 
@@ -66,8 +80,17 @@ namespace CustomerApp {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Delete(item);
-                ReadDatabase(); 
+                ReadDatabase();
             }
         }
+
+        private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var item = CustomerListView.SelectedItem as Customer;
+            if (item != null) {
+                NameTextBox.Text = item.Name;
+                PhoneTextBox.Text = item.Phone;
+                AddressTextBox.Text = item.Address;
+            }
         }
     }
+}
