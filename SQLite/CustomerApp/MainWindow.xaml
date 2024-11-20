@@ -39,11 +39,11 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button Content="セーブ" x:Name="Savebutton" Click="Savebutton_Click" Margin="2" Grid.Row="0"/>
+                    <Button Content="新規保存" x:Name="Savebutton" Click="Savebutton_Click" Margin="2" Grid.Row="0"/>
                     <Button Content="アップデート" x:Name="Updatebutton" Click="UpdateButton_Click" Margin="2" Grid.Row="1"/>
                     <Button Content="Delete" x:Name="Deletebutton" Click="Deletebutton_Click" Margin="2" Grid.Row="2"/>
                     <Button Content="画像を開く" x:Name="Hirakubutton" Click="Hirakubutton_Click" Margin="2" Grid.Row="3"/>
-                    <Button Content="クリア" x:Name="Clearbutton" Click="Clearbutton_Click" Margin="2" Grid.Row="4"/>
+                    <Button Content="プレビュー画像を削除" x:Name="Clearbutton" Click="Clearbutton_Click" Margin="2" Grid.Row="4"/>
                 </Grid>
                 <Image x:Name="TestImage"  Grid.Column="1">
                 </Image>
@@ -68,7 +68,9 @@
                                 HorizontalAlignment="Stretch" 
                                 VerticalAlignment="Stretch" 
                                 Margin="10,10,10,10" 
-                                Source="{Binding ImagePath}" />
+                                Source="{Binding ImagePath}"
+                                Height="80" Width="80"
+                                />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

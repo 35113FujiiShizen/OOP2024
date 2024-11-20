@@ -108,14 +108,33 @@ namespace CustomerApp {
 
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
+
             if (item != null) {
                 NameTextBox.Text = item.Name;
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
+
+                // selectedImagePath が null または空でないことを確認し、画像を表示する
+                if (!string.IsNullOrEmpty(item.ImagePath)) {
+                    try {
+                        BitmapImage bitmap = new BitmapImage(new Uri(item.ImagePath));
+                        TestImage.Source = bitmap;  // 画像を表示する
+                    }
+                    catch (Exception ex) {
+                        MessageBox.Show("画像の読み込みに失敗しました: " + ex.Message);
+                    }
+                }
+            } else {
+                // item が null の場合は何もしないか、またはデフォルトの動作を設定
+                NameTextBox.Clear();
+                PhoneTextBox.Clear();
+                AddressTextBox.Clear();
+                TestImage.Source = null;
             }
         }
 
-        
+
+
         private void Hirakubutton_Click(object sender, RoutedEventArgs e) {
             var openFileDialog = new OpenFileDialog {
                 Filter = "画像ファイル|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
