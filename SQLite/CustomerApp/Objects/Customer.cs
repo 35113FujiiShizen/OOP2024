@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Microsoft.Win32;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,9 @@ namespace CustomerApp.Objects {
         /// </summary>
         public string Phone { get; set; }
         public string Address { get; set; }
+        public string ImagePath {  get; set; }
         public override string ToString() {
-            return $"{Id}  {Name}  {Phone}　{Address}";
+            return $"{Id}  {Name}  {Phone}　{Address} {ImagePath}";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Objects;
+using Microsoft.Win32;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace CustomerApp {
             InitializeComponent();
             ReadDatabase();
         }
+        private string selectedImagePath;
+
         private void InputItemsAllClear() {
             NameTextBox.Text = "";
             PhoneTextBox.Text = "";
@@ -46,6 +49,7 @@ namespace CustomerApp {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
+                ImagePath = selectedImagePath,
             };
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -67,6 +71,7 @@ namespace CustomerApp {
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
+            item.ImagePath = selectedImagePath;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.Update(item);
@@ -108,6 +113,27 @@ namespace CustomerApp {
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
             }
+        }
+
+        
+        private void Hirakubutton_Click(object sender, RoutedEventArgs e) {
+            var openFileDialog = new OpenFileDialog {
+                Filter = "画像ファイル|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
+            };
+            if (openFileDialog.ShowDialog() == true) {
+                try {
+                    selectedImagePath = openFileDialog.FileName;  // 画像のファイルパスを保存
+                    BitmapImage bitmap = new BitmapImage(new Uri(selectedImagePath));
+                    TestImage.Source = bitmap;  // TestImage の Source を直接設定
+                }
+                catch (Exception ex) {
+                    MessageBox.Show("画像を読み込む際にエラーが発生しました: " + ex.Message);
+                }
+            }
+        }
+
+        private void Clearbutton_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }
