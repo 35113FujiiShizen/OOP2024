@@ -72,6 +72,7 @@ namespace CustomerApp {
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
             item.ImagePath = selectedImagePath;
+            selectedImagePath = null;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.Update(item);
@@ -113,6 +114,7 @@ namespace CustomerApp {
                 NameTextBox.Text = item.Name;
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
+                TestImage.Source = null;
 
                 // selectedImagePath が null または空でないことを確認し、画像を表示する
                 if (!string.IsNullOrEmpty(item.ImagePath)) {
@@ -124,12 +126,6 @@ namespace CustomerApp {
                         MessageBox.Show("画像の読み込みに失敗しました: " + ex.Message);
                     }
                 }
-            } else {
-                // item が null の場合は何もしないか、またはデフォルトの動作を設定
-                NameTextBox.Clear();
-                PhoneTextBox.Clear();
-                AddressTextBox.Clear();
-                TestImage.Source = null;
             }
         }
 
@@ -146,13 +142,13 @@ namespace CustomerApp {
                     TestImage.Source = bitmap;  // TestImage の Source を直接設定
                 }
                 catch (Exception ex) {
-                    MessageBox.Show("画像を読み込む際にエラーが発生しました: " + ex.Message);
+                    MessageBox.Show("画像を読み込む際にエラーが発生しました" + ex.Message);
                 }
             }
         }
 
         private void Clearbutton_Click(object sender, RoutedEventArgs e) {
-
+            TestImage.Source = null;
         }
     }
 }
