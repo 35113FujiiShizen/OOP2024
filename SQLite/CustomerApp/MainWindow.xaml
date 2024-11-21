@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="顧客管理ソフト" Height="700" Width="500">
+        Title="顧客管理ソフト" Height="700" Width="600">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
@@ -62,14 +62,21 @@
                 <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged" Grid.Row="2" Grid.Column="1"/>
             </Grid>
 
-            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="430" SelectionChanged="CustomerListView_SelectionChanged">
+            <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="400" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="auto"/>
                         <GridViewColumn Header="名前" DisplayMemberBinding="{Binding Name}" Width="auto"/>
                         <GridViewColumn Header="電話番号" DisplayMemberBinding="{Binding Phone}" Width="auto"/>
                         <GridViewColumn Header="住所" DisplayMemberBinding="{Binding Address}" Width="auto"/>
-                        <GridViewColumn Header="写真" DisplayMemberBinding="{Binding bitmapImage}" Width="auto"/>
+                        <GridViewColumn Header="写真" Width="auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImagePath}" Width="170"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        
                     </GridView>
                 </ListView.View>
 
@@ -82,13 +89,13 @@
                                 <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
                                 <TextBlock Text="{Binding Address}" Foreground="Green"/>
                                 <Image
-                                    x:Name="RoudedImage"
-                                    HorizontalAlignment="Stretch" 
-                                    VerticalAlignment="Stretch" 
-                                    Margin="10,10,10,10" 
-                                    Source="{Binding ImagePath}"
-                                    Height="50" Width="50"
-                                 />
+                                  x:Name="RoudedImage"
+                                  HorizontalAlignment="Stretch" 
+                                  VerticalAlignment="Stretch" 
+                                  Margin="10,10,10,10" 
+                                  Source="{Binding ImagePath}"
+                                  Height="50" Width="50"
+                               />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
