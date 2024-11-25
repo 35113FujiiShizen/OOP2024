@@ -37,6 +37,7 @@ namespace CustomerApp {
             TestImage.Source = null;
         }
 
+        //登録ボタン
         private void Savebutton_Click(object sender, RoutedEventArgs e) {
             if (string.IsNullOrEmpty(NameTextBox.Text) && string.IsNullOrEmpty(AddressTextBox.Text) && string.IsNullOrEmpty(PhoneTextBox.Text)) {
                 MessageBox.Show("何も入力されていません");
@@ -60,6 +61,7 @@ namespace CustomerApp {
             ReadDatabase();
         }
 
+        //更新ボタン
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (string.IsNullOrEmpty(NameTextBox.Text) && string.IsNullOrEmpty(AddressTextBox.Text) && string.IsNullOrEmpty(PhoneTextBox.Text)) {
@@ -90,12 +92,14 @@ namespace CustomerApp {
                 CustomerListView.ItemsSource = _customers;
             }
         }
-        
+
+        //検索ボックス
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
             CustomerListView.ItemsSource = filterList;
         }
 
+        //削除ボタン
         private void Deletebutton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
@@ -109,6 +113,7 @@ namespace CustomerApp {
             }
         }
 
+        //ListViewの中を選ぶと…
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
 
@@ -140,7 +145,7 @@ namespace CustomerApp {
         }
 
 
-
+        //開くボタン
         private void Hirakubutton_Click(object sender, RoutedEventArgs e) {
             var openFileDialog = new OpenFileDialog {
                 Filter = "画像ファイル|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
@@ -166,6 +171,7 @@ namespace CustomerApp {
             }
         }
 
+        //プレビュー画像を削除
         private void Clearbutton_Click(object sender, RoutedEventArgs e) {
             TestImage.Source = null;
         }
