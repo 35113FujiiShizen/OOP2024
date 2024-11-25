@@ -59,6 +59,7 @@ namespace CustomerApp {
                 
             }
             ReadDatabase();
+            InputItemsAllClear();
         }
 
         //更新ボタン
