@@ -28,12 +28,13 @@ namespace CustomerApp {
             InitializeComponent();
             ReadDatabase();
         }
-        private string selectedImagePath;
+        private byte[] selectedImageData;
 
         private void InputItemsAllClear() {
             NameTextBox.Text = "";
             PhoneTextBox.Text = "";
             AddressTextBox.Text = "";
+            TestImage.Source = null;
         }
 
         private void Savebutton_Click(object sender, RoutedEventArgs e) {
@@ -49,11 +50,12 @@ namespace CustomerApp {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                ImagePath = selectedImagePath,
+                ImageData = selectedImageData,
             };
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
+                
             }
             ReadDatabase();
         }
@@ -71,13 +73,14 @@ namespace CustomerApp {
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
-            item.ImagePath = selectedImagePath;
-            selectedImagePath = null;
+            item.ImageData = selectedImageData;
+            selectedImageData = null;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.Update(item);
             }
             ReadDatabase();
+            InputItemsAllClear();
         }
 
         private void ReadDatabase() {
@@ -85,10 +88,9 @@ namespace CustomerApp {
                 connection.CreateTable<Customer>();
                 _customers = connection.Table<Customer>().ToList();
                 CustomerListView.ItemsSource = _customers;
-                InputItemsAllClear();
             }
         }
-
+        
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
             CustomerListView.ItemsSource = filterList;
@@ -116,11 +118,19 @@ namespace CustomerApp {
                 AddressTextBox.Text = item.Address;
                 TestImage.Source = null;
 
-                // selectedImagePath が null または空でないことを確認し、画像を表示する
-                if (!string.IsNullOrEmpty(item.ImagePath)) {
+                // selectedImageData が null または空でないことを確認し、画像を表示する
+                if (item.ImageData != null && item.ImageData.Length > 0) {
                     try {
-                        BitmapImage bitmap = new BitmapImage(new Uri(item.ImagePath));
-                        TestImage.Source = bitmap;  // 画像を表示する
+                        using (MemoryStream stream = new MemoryStream(item.ImageData)) {
+                            BitmapImage bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.StreamSource = stream;  
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.EndInit();
+
+                            // 画像を表示する
+                            TestImage.Source = bitmap;
+                        }
                     }
                     catch (Exception ex) {
                         MessageBox.Show("画像の読み込みに失敗しました: " + ex.Message);
@@ -137,9 +147,18 @@ namespace CustomerApp {
             };
             if (openFileDialog.ShowDialog() == true) {
                 try {
-                    selectedImagePath = openFileDialog.FileName;  // 画像のファイルパスを保存
-                    BitmapImage bitmap = new BitmapImage(new Uri(selectedImagePath));
-                    TestImage.Source = bitmap;  // TestImage の Source を直接設定
+                    byte[] imageData = File.ReadAllBytes(openFileDialog.FileName);
+                    selectedImageData = imageData;  
+                    using (MemoryStream stream = new MemoryStream(selectedImageData)) {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;  
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+
+                        // 画像を表示
+                        TestImage.Source = bitmap;
+                    }
                 }
                 catch (Exception ex) {
                     MessageBox.Show("画像を読み込む際にエラーが発生しました" + ex.Message);

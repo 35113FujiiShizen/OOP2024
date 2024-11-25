@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="顧客管理ソフト" Height="700" Width="600">
+        Title="顧客管理ソフト" Height="700" Width="650">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
@@ -65,14 +65,13 @@
             <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="400" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="auto"/>
                         <GridViewColumn Header="名前" DisplayMemberBinding="{Binding Name}" Width="auto"/>
                         <GridViewColumn Header="電話番号" DisplayMemberBinding="{Binding Phone}" Width="auto"/>
                         <GridViewColumn Header="住所" DisplayMemberBinding="{Binding Address}" Width="auto"/>
                         <GridViewColumn Header="写真" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding ImagePath}" Width="170"/>
+                                    <Image Source="{Binding ImageData}" Width="170"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
