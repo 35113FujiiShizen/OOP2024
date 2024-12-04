@@ -1,21 +1,15 @@
-﻿namespace Mauiapp {
+﻿using Microsoft.Maui.Controls;
+using System.ComponentModel;
+using System.Windows.Input;
+
+namespace Mauiapp {
     public partial class MainPage : ContentPage {
-        int count = 0;
-
-        public MainPage() {
-            InitializeComponent();
+        private int _count;
+        public int Count {
+            get => _count;
+            set => SetProperty(ref _count, value);
         }
-
-        private void OnCounterClicked(object sender, EventArgs e) {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+        public ICommand IncrementCommand { get; }
+        
     }
-
 }
